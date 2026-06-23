@@ -1,0 +1,266 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@import "@fontsource/cinzel/400.css";
+@import "@fontsource/cinzel/500.css";
+@import "@fontsource/cinzel/600.css";
+@import "@fontsource/cormorant-garamond/300.css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600-italic.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/pinyon-script/400.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Royal Edition — Tiwalade & Eniolaoluwa
+ * Palette and tokens are locked per the Royal Build Manual v3.
+ */
+
+@theme inline {
+  /* Royal palette */
+  --color-ivory: var(--ivory);
+  --color-paper: var(--paper);
+  --color-emerald-deep: var(--emerald-deep);
+  --color-emerald-ink: var(--emerald-ink);
+  --color-gold: var(--gold-champagne);
+  --color-gold-soft: var(--gold-soft);
+  --color-oxblood: var(--oxblood);
+  --color-charcoal: var(--charcoal);
+  --color-ink: var(--ink);
+
+  /* Royal type */
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-ceremonial: "Cinzel", "Trajan Pro", serif;
+  --font-script: "Pinyon Script", "Snell Roundhand", cursive;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* shadcn mapping */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  /* Royal */
+  --ivory: #fbf7ee;
+  --paper: #f4eedc;
+  --emerald-deep: #0b3b2e;
+  --emerald-ink: #06241b;
+  --gold-champagne: #c9a961;
+  --gold-soft: #e6c98a;
+  --oxblood: #6b1f2a;
+  --charcoal: #2a2a2a;
+  --ink: #1a1a1a;
+  --gilt: linear-gradient(135deg, #b8862f 0%, #e6c36a 45%, #b8862f 100%);
+
+  /* shadcn (mapped to royal) */
+  --radius: 0.5rem;
+  --background: #fbf7ee;
+  --foreground: #06241b;
+  --card: #ffffff;
+  --card-foreground: #06241b;
+  --popover: #ffffff;
+  --popover-foreground: #06241b;
+  --primary: #0b3b2e;
+  --primary-foreground: #fbf7ee;
+  --secondary: #f4eedc;
+  --secondary-foreground: #06241b;
+  --muted: #efe7d3;
+  --muted-foreground: #5a5347;
+  --accent: #c9a961;
+  --accent-foreground: #06241b;
+  --destructive: #6b1f2a;
+  --destructive-foreground: #fbf7ee;
+  --border: rgba(201, 169, 97, 0.35);
+  --input: rgba(201, 169, 97, 0.45);
+  --ring: #c9a961;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ivory);
+    color: var(--emerald-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "kern";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection { background: var(--gold-champagne); color: var(--emerald-ink); }
+}
+
+/* ───────────── Typography utilities ───────────── */
+
+@utility font-ceremonial { font-family: var(--font-ceremonial); letter-spacing: 0.18em; text-transform: uppercase; }
+@utility font-display { font-family: var(--font-display); font-weight: 300; }
+@utility font-script { font-family: var(--font-script); }
+@utility eyebrow {
+  font-family: var(--font-ceremonial);
+  font-size: 0.7rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-champagne);
+}
+
+@utility text-gilt {
+  background: linear-gradient(135deg, #b8862f 0%, #e6c36a 45%, #b8862f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-paper-grain {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.015) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 1px;
+}
+
+@utility bg-emerald-ink-grain {
+  background-color: var(--emerald-ink);
+  background-image:
+    radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.18) 1px, transparent 1px);
+  background-size: 3px 3px, 9px 9px;
+  background-position: 0 0, 1px 1px;
+}
+
+@utility gold-hairline {
+  height: 1px;
+  width: 120px;
+  background: linear-gradient(90deg, transparent, var(--gold-champagne) 50%, transparent);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@utility gold-hairline-wide {
+  height: 1px;
+  width: 240px;
+  background: linear-gradient(90deg, transparent, var(--gold-champagne) 50%, transparent);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Gilt sheen sweep for buttons / seals */
+@utility gilt-sheen {
+  position: relative;
+  overflow: hidden;
+}
+@utility gilt-sheen-after {
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  &:hover::after { transform: translateX(120%); }
+}
+
+/* Royal button — emerald with gilt border */
+@utility btn-royal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 0.95rem 2rem;
+  font-family: var(--font-ceremonial);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  background: var(--emerald-deep);
+  color: var(--ivory);
+  border: 1px solid var(--gold-champagne);
+  cursor: pointer;
+  transition: background 240ms ease, color 240ms ease, transform 240ms cubic-bezier(0.22,1,0.36,1);
+  &:hover { background: var(--emerald-ink); color: var(--gold-soft); }
+  &:active { transform: translateY(1px); }
+  &:focus-visible { outline: 2px solid var(--gold-champagne); outline-offset: 3px; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+@utility btn-royal-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 0.9rem 1.9rem;
+  font-family: var(--font-ceremonial);
+  font-size: 0.7rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--emerald-deep);
+  border: 1px solid var(--gold-champagne);
+  cursor: pointer;
+  transition: background 220ms ease, color 220ms ease;
+  &:hover { background: var(--gold-champagne); color: var(--emerald-ink); }
+}
+
+/* Card */
+@utility card-royal {
+  background: var(--card);
+  border: 1px solid color-mix(in oklab, var(--gold-champagne) 35%, transparent);
+  box-shadow: 0 1px 0 rgba(11,59,46,0.04), 0 24px 60px -40px rgba(11,59,46,0.25);
+}
+
+/* Reveal animations */
+@keyframes royal-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes royal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes seal-press {
+  0% { opacity: 0; transform: scale(1.4) rotate(-8deg); }
+  60% { opacity: 1; transform: scale(0.94) rotate(-2deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes draw-line {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@utility animate-royal-rise { animation: royal-rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@utility animate-royal-fade { animation: royal-fade 600ms ease both; }
+@utility animate-seal-press { animation: seal-press 700ms cubic-bezier(0.34, 1.4, 0.5, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
