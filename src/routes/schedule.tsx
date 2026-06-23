@@ -2,29 +2,22 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { Cipher } from "@/components/heraldry/Cipher";
+import site from "@/content/site.json";
+import schedule from "@/content/schedule.json";
 
 export const Route = createFileRoute("/schedule")({
   head: () => ({
     meta: [
-      { title: "Order of the Day — Eniolaoluwa & Tiwalade" },
-      { name: "description", content: "The full procession for 27 August 2026 — ceremony, reception, and after-party." },
-      { property: "og:title", content: "Order of the Day — 27 August 2026" },
-      { property: "og:description", content: "The full procession for the wedding of Eniolaoluwa & Tiwalade." },
+      { title: `Order of the Day — ${site.bride.first} & ${site.groom.first}` },
+      { name: "description", content: `The full procession for ${site.date.display} — ceremony, reception, and after-party.` },
+      { property: "og:title", content: `Order of the Day — ${site.date.display}` },
+      { property: "og:description", content: `The full procession for the wedding of ${site.bride.first} & ${site.groom.first}.` },
     ],
   }),
   component: Schedule,
 });
 
-const DAY = [
-  { time: "10:00", title: "Guests arrive · Welcome tea", place: "The Garden Court", note: "Light refreshments and string quartet" },
-  { time: "11:30", title: "Engagement (Traditional)", place: "Yoruba ceremony · Main hall", note: "Aso-oke, family blessings, the cipher exchange" },
-  { time: "14:00", title: "Lunch & Family photographs", place: "The Orangery", note: "Plated lunch · Aso-ebi gathering" },
-  { time: "16:00", title: "White Wedding Ceremony", place: "Chapel of St. Saviour", note: "Processional, vows, exchange of rings" },
-  { time: "17:30", title: "Cocktail Hour", place: "Cloister terrace", note: "Champagne, canapés, sundown jazz" },
-  { time: "19:00", title: "Reception & Dinner", place: "The Grand Ballroom", note: "Four-course tasting menu · Toasts" },
-  { time: "21:00", title: "First dance · Cake", place: "Ballroom floor", note: "Bring your dancing shoes" },
-  { time: "22:00", title: "After-party", place: "The Cellar", note: "DJ Spinall ’til late — black tie optional" },
-];
+const DAY = schedule.items;
 
 function Schedule() {
   return (
@@ -34,7 +27,7 @@ function Schedule() {
         <DisplayTitle className="mt-4">Order of the Day</DisplayTitle>
         <GoldHairline withCipher wide />
         <p className="font-display italic text-lg max-w-xl mx-auto text-charcoal/80">
-          Thursday, the twenty-seventh of August, two thousand and twenty-six.
+          Thursday, {site.date.long}.
           A single, unhurried day from morning tea to last dance.
         </p>
       </div>

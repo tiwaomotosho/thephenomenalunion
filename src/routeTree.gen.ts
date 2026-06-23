@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VenueRouteImport } from './routes/venue'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as ScheduleRouteImport } from './routes/schedule'
-import { Route as RsvpRouteImport } from './routes/rsvp'
 import { Route as RegistryRouteImport } from './routes/registry'
 import { Route as NotesRouteImport } from './routes/notes'
 import { Route as GalleryRouteImport } from './routes/gallery'
@@ -32,11 +31,6 @@ const ThankYouRoute = ThankYouRouteImport.update({
 const ScheduleRoute = ScheduleRouteImport.update({
   id: '/schedule',
   path: '/schedule',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RsvpRoute = RsvpRouteImport.update({
-  id: '/rsvp',
-  path: '/rsvp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RegistryRoute = RegistryRouteImport.update({
@@ -71,7 +65,6 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/notes': typeof NotesRoute
   '/registry': typeof RegistryRoute
-  '/rsvp': typeof RsvpRoute
   '/schedule': typeof ScheduleRoute
   '/thank-you': typeof ThankYouRoute
   '/venue': typeof VenueRoute
@@ -82,7 +75,6 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/notes': typeof NotesRoute
   '/registry': typeof RegistryRoute
-  '/rsvp': typeof RsvpRoute
   '/schedule': typeof ScheduleRoute
   '/thank-you': typeof ThankYouRoute
   '/venue': typeof VenueRoute
@@ -94,7 +86,6 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/notes': typeof NotesRoute
   '/registry': typeof RegistryRoute
-  '/rsvp': typeof RsvpRoute
   '/schedule': typeof ScheduleRoute
   '/thank-you': typeof ThankYouRoute
   '/venue': typeof VenueRoute
@@ -107,7 +98,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/notes'
     | '/registry'
-    | '/rsvp'
     | '/schedule'
     | '/thank-you'
     | '/venue'
@@ -118,7 +108,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/notes'
     | '/registry'
-    | '/rsvp'
     | '/schedule'
     | '/thank-you'
     | '/venue'
@@ -129,7 +118,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/notes'
     | '/registry'
-    | '/rsvp'
     | '/schedule'
     | '/thank-you'
     | '/venue'
@@ -141,7 +129,6 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRoute
   NotesRoute: typeof NotesRoute
   RegistryRoute: typeof RegistryRoute
-  RsvpRoute: typeof RsvpRoute
   ScheduleRoute: typeof ScheduleRoute
   ThankYouRoute: typeof ThankYouRoute
   VenueRoute: typeof VenueRoute
@@ -168,13 +155,6 @@ declare module '@tanstack/react-router' {
       path: '/schedule'
       fullPath: '/schedule'
       preLoaderRoute: typeof ScheduleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/rsvp': {
-      id: '/rsvp'
-      path: '/rsvp'
-      fullPath: '/rsvp'
-      preLoaderRoute: typeof RsvpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/registry': {
@@ -221,7 +201,6 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRoute,
   NotesRoute: NotesRoute,
   RegistryRoute: RegistryRoute,
-  RsvpRoute: RsvpRoute,
   ScheduleRoute: ScheduleRoute,
   ThankYouRoute: ThankYouRoute,
   VenueRoute: VenueRoute,

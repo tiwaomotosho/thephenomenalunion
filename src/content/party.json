@@ -1,0 +1,14 @@
+{
+  "eyebrow": "The Court of Honour",
+  "title": "Our bridal party",
+  "members": [
+    { "role": "Chief Bridesmaid", "name": "Folasade Adékúnlé" },
+    { "role": "Bridesmaid", "name": "Olamide Bámidélé" },
+    { "role": "Bridesmaid", "name": "Chiamaka Eze" },
+    { "role": "Bridesmaid", "name": "Halima Yusuf" },
+    { "role": "Best Man", "name": "Dr. Babátúndé Ọmọ́tọ̀shọ́" },
+    { "role": "Groomsman", "name": "Femi Adégbúyì" },
+    { "role": "Groomsman", "name": "Chinedu Okafor" },
+    { "role": "Groomsman", "name": "Ibrahim Sani" }
+  ]
+}

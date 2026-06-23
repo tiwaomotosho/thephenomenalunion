@@ -3,11 +3,13 @@ import { useState } from "react";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { Plus, Minus } from "lucide-react";
+import site from "@/content/site.json";
+import faq from "@/content/faq.json";
 
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — Eniolaoluwa & Tiwalade" },
+      { title: `FAQ — ${site.bride.first} & ${site.groom.first}` },
       { name: "description", content: "Dress code, children, parking, and other gentle matters." },
       { property: "og:title", content: "Frequently Asked" },
       { property: "og:description", content: "Dress code, children, parking, and other gentle matters." },
@@ -16,40 +18,7 @@ export const Route = createFileRoute("/faq")({
   component: Faq,
 });
 
-const FAQS = [
-  {
-    q: "What is the dress code?",
-    a: "Black tie and traditional. Floor-length gowns, agbada, gele, dinner jackets. The house palette is ivory, emerald, oxblood, and gold — but please wear what makes you feel beautiful.",
-  },
-  {
-    q: "May I bring my children?",
-    a: "We have chosen an adults-only celebration, with the warm exception of those named on your invitation. A list of trusted babysitters will be sent on request.",
-  },
-  {
-    q: "What time should I arrive?",
-    a: "Doors open at 10:00 for the engagement; the white wedding begins promptly at 16:00. We recommend arriving thirty minutes before each ceremony.",
-  },
-  {
-    q: "Will there be parking?",
-    a: "Yes — valet from 09:00 at the venue. A complimentary shuttle will run between The Wheatbaker, Eko Hotel, and the chapel from 09:30.",
-  },
-  {
-    q: "Can I take photographs during the ceremony?",
-    a: "We kindly ask that phones and cameras be kept away during both ceremonies. A full gallery will be shared with all guests within four weeks.",
-  },
-  {
-    q: "Is there a gift registry?",
-    a: "Your presence is gift enough. For those who have asked, please see our Blessings page — small contributions toward our first home.",
-  },
-  {
-    q: "Dietary requirements?",
-    a: "Standard, vegetarian, kosher, and halal options are available. Please note your preference on the RSVP form.",
-  },
-  {
-    q: "How do I get in touch?",
-    a: "Our chief bridesmaid Folasade can be reached at folasade@etomotosho.com for all matters of the day.",
-  },
-];
+const FAQS = faq.items;
 
 function Faq() {
   const [open, setOpen] = useState<number | null>(0);

@@ -16,7 +16,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Royal Edition — Tiwalade & Eniolaoluwa
+ * Royal Edition — The Phenomenal Union · Ẹniọláolúwa & Tiwaladé
  * Palette and tokens are locked per the Royal Build Manual v3.
  */
 
@@ -28,6 +28,7 @@
   --color-emerald-ink: var(--emerald-ink);
   --color-gold: var(--gold-champagne);
   --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
   --color-oxblood: var(--oxblood);
   --color-charcoal: var(--charcoal);
   --color-ink: var(--ink);
@@ -72,6 +73,8 @@
   --emerald-ink: #06241b;
   --gold-champagne: #c9a961;
   --gold-soft: #e6c98a;
+  /* Deeper antique gold — small text on light grounds (passes WCAG AA ~5.4:1). */
+  --gold-deep: #7a5f28;
   --oxblood: #6b1f2a;
   --charcoal: #2a2a2a;
   --ink: #1a1a1a;
@@ -124,7 +127,9 @@
   font-size: 0.7rem;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--gold-champagne);
+  /* Deeper gold so small eyebrow text stays legible on ivory/cream grounds.
+     On emerald grounds, override with !text-gold-soft for the bright accent. */
+  color: var(--gold-deep);
 }
 
 @utility text-gilt {

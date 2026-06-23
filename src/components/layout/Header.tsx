@@ -2,16 +2,22 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Cipher } from "@/components/heraldry/Cipher";
 import { Menu, X } from "lucide-react";
+import site from "@/content/site.json";
 
 const NAV = [
   { to: "/", label: "Home" },
   { to: "/schedule", label: "Order of the Day" },
-  { to: "/venue", label: "Venue & Stay" },
+  { to: "/venue", label: "Venue" },
   { to: "/gallery", label: "Gallery" },
   { to: "/registry", label: "Blessings" },
   { to: "/notes", label: "Notes" },
   { to: "/faq", label: "FAQ" },
 ] as const;
+
+/** Scroll to the very top — used when a link points at the page already shown. */
+function scrollToTop() {
+  if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
 export function Header() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -29,6 +35,10 @@ export function Header() {
     setOpen(false);
   }, [pathname]);
 
+  // The home hero is a dark image; while sitting over it (top of "/", not yet
+  // scrolled) the bar is transparent, so links must be light to stay legible.
+  const overHero = pathname === "/" && !scrolled;
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
@@ -36,10 +46,22 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-        <Link to="/" className="group flex items-center gap-3" aria-label="Home">
-          <Cipher size={26} className="opacity-90 group-hover:opacity-100 transition-opacity" />
-          <span className="font-ceremonial text-[0.65rem] tracking-[0.32em] text-emerald-deep">
-            E &nbsp;·&nbsp; T
+        <Link
+          to="/"
+          onClick={() => pathname === "/" && scrollToTop()}
+          className="group flex items-center gap-3"
+          aria-label="Home"
+        >
+          <Cipher
+            size={26}
+            className={`transition-opacity ${overHero ? "text-ivory opacity-95" : "opacity-90 group-hover:opacity-100"}`}
+          />
+          <span
+            className={`font-ceremonial text-[0.65rem] tracking-[0.32em] ${
+              overHero ? "text-ivory" : "text-emerald-deep"
+            }`}
+          >
+            {site.monogram}
           </span>
         </Link>
 
@@ -50,22 +72,27 @@ export function Header() {
               <Link
                 key={n.to}
                 to={n.to}
+                onClick={() => active && scrollToTop()}
                 className={`font-ceremonial text-[0.65rem] tracking-[0.28em] transition-colors ${
-                  active ? "text-gold" : "text-emerald-ink hover:text-gold"
+                  active
+                    ? "text-gold"
+                    : overHero
+                      ? "text-ivory/90 hover:text-gold-soft"
+                      : "text-emerald-ink hover:text-gold"
                 }`}
               >
                 {n.label}
               </Link>
             );
           })}
-          <Link to="/rsvp" className="btn-royal !py-2 !px-5 !text-[0.62rem]">
-            RSVP
+          <Link to="/registry" className="btn-royal !py-2 !px-5 !text-[0.62rem]">
+            Bless Us
           </Link>
         </nav>
 
         <button
           onClick={() => setOpen((v) => !v)}
-          className="lg:hidden text-emerald-deep p-2"
+          className={`lg:hidden p-2 ${overHero ? "text-ivory" : "text-emerald-deep"}`}
           aria-label="Menu"
           aria-expanded={open}
         >
@@ -80,13 +107,14 @@ export function Header() {
               <Link
                 key={n.to}
                 to={n.to}
+                onClick={() => pathname === n.to && scrollToTop()}
                 className="font-ceremonial text-xs tracking-[0.28em] text-emerald-ink hover:text-gold"
               >
                 {n.label}
               </Link>
             ))}
-            <Link to="/rsvp" className="btn-royal mt-2 self-start">
-              RSVP
+            <Link to="/registry" className="btn-royal mt-2 self-start">
+              Bless Us
             </Link>
           </nav>
         </div>

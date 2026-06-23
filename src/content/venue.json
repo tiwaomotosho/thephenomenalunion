@@ -1,0 +1,19 @@
+{
+  "eyebrow": "The Venue",
+  "title": "The Venue",
+  "name": "Chapel of St. Saviour",
+  "subname": "& The Grand Ballroom",
+  "blurb": "A nineteenth-century stone chapel set within a private garden, connected by a cloister to the ballroom — the same roof from vows to last dance.",
+  "address": "12 Cathedral Lane, Ikoyi, Lagos",
+  "phone": "+234 (0) 808 555 0142",
+  "parking": "Valet parking from 09:00",
+  "mapUrl": "https://maps.google.com",
+  "dressCode": {
+    "title": "Black tie & traditional",
+    "body": "Floor-length, agbada, gele, dinner jacket. Ivory, emerald, oxblood, gold — the house palette."
+  },
+  "children": {
+    "title": "An adults-only celebration",
+    "body": "With the warm exception of those listed on your invitation."
+  }
+}

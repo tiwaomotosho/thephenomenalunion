@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import site from "../content/site.json";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/layout/BackToTop";
@@ -66,15 +67,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Eniolaoluwa & Tiwalade — XXVII · VIII · MMXXVI" },
-      { name: "description", content: "By royal appointment — the wedding of Eniolaoluwa & Tiwalade. A love written in Lagos. 27 August 2026." },
+      { title: `${site.bride.first} & ${site.groom.first} — ${site.date.display}` },
+      { name: "description", content: `${site.appointment} — the wedding of ${site.bride.first} & ${site.groom.first}. ${site.tagline}.` },
       { name: "theme-color", content: "#0b3b2e" },
-      { property: "og:title", content: "Eniolaoluwa & Tiwalade — XXVII · VIII · MMXXVI" },
-      { property: "og:description", content: "By royal appointment — the wedding of Eniolaoluwa & Tiwalade. A love written in Lagos. 27 August 2026." },
+      { property: "og:title", content: `${site.bride.first} & ${site.groom.first} — ${site.date.display}` },
+      { property: "og:description", content: `${site.appointment} — the wedding of ${site.bride.first} & ${site.groom.first}. ${site.tagline}.` },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Eniolaoluwa & Tiwalade — XXVII · VIII · MMXXVI" },
-      { name: "twitter:description", content: "By royal appointment — the wedding of Eniolaoluwa & Tiwalade. A love written in Lagos. 27 August 2026." },
+      { name: "twitter:title", content: `${site.bride.first} & ${site.groom.first} — ${site.date.display}` },
+      { name: "twitter:description", content: `${site.appointment} — the wedding of ${site.bride.first} & ${site.groom.first}. ${site.tagline}.` },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3d1048f-1e2b-42e6-87ba-043a6d9a2cc8/id-preview-8c9d01d2--0c9ac2a0-f7ce-4858-a793-0605c60d7cd3.lovable.app-1782221928616.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3d1048f-1e2b-42e6-87ba-043a6d9a2cc8/id-preview-8c9d01d2--0c9ac2a0-f7ce-4858-a793-0605c60d7cd3.lovable.app-1782221928616.png" },
     ],

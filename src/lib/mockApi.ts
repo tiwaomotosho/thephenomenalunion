@@ -79,28 +79,6 @@ export async function contribute(
 
 export const SEAL_SRC = seal;
 
-// ─────────── RSVP ───────────
-export interface RsvpInput {
-  fullName: string;
-  email: string;
-  attending: "yes" | "no";
-  partySize: number;
-  meal: "standard" | "vegetarian" | "kosher" | "halal";
-  song?: string;
-  note?: string;
-}
-
-const RSVP_KEY = "et2026.rsvp.v1";
-
-export async function submitRsvp(input: RsvpInput): Promise<{ ok: true; confirmationId: string }> {
-  await sleep(LATENCY() + 300);
-  const list = read<(RsvpInput & { id: string; at: number })[]>(RSVP_KEY, []);
-  const id = `RSVP-${Date.now().toString(36).toUpperCase()}`;
-  list.push({ ...input, id, at: Date.now() });
-  write(RSVP_KEY, list);
-  return { ok: true, confirmationId: id };
-}
-
 // ─────────── Notes Wall ───────────
 export interface Note {
   id: string;

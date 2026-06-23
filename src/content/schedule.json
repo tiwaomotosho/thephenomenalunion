@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "time": "10:00", "title": "Guests arrive · Welcome tea", "place": "The Garden Court", "note": "Light refreshments and string quartet" },
+    { "time": "11:30", "title": "Engagement (Traditional)", "place": "Yoruba ceremony · Main hall", "note": "Aso-oke, family blessings, the cipher exchange" },
+    { "time": "14:00", "title": "Lunch & Family photographs", "place": "The Orangery", "note": "Plated lunch · Aso-ebi gathering" },
+    { "time": "16:00", "title": "White Wedding Ceremony", "place": "Chapel of St. Saviour", "note": "Processional, vows, exchange of rings" },
+    { "time": "17:30", "title": "Cocktail Hour", "place": "Cloister terrace", "note": "Champagne, canapés, sundown jazz" },
+    { "time": "19:00", "title": "Reception & Dinner", "place": "The Grand Ballroom", "note": "Four-course tasting menu · Toasts" },
+    { "time": "21:00", "title": "First dance · Cake", "place": "Ballroom floor", "note": "Bring your dancing shoes" },
+    { "time": "22:00", "title": "After-party", "place": "The Cellar", "note": "DJ Spinall ’til late — black tie optional" }
+  ]
+}

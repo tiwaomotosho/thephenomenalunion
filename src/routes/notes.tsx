@@ -2,11 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { NotesWall } from "@/components/notes/NotesWall";
+import site from "@/content/site.json";
 
 export const Route = createFileRoute("/notes")({
   head: () => ({
     meta: [
-      { title: "Notes Wall — Eniolaoluwa & Tiwalade" },
+      { title: `Notes Wall — ${site.bride.first} & ${site.groom.first}` },
       { name: "description", content: "Leave a blessing for the table; read those of others." },
       { property: "og:title", content: "Notes Wall" },
       { property: "og:description", content: "A guestbook of blessings for the couple." },

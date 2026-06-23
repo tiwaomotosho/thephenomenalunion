@@ -3,35 +3,20 @@ import { useState } from "react";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { X } from "lucide-react";
+import { img } from "@/content/images";
+import site from "@/content/site.json";
+import gallery from "@/content/gallery.json";
 
-import g1 from "@/assets/gallery-1.jpg";
-import g2 from "@/assets/gallery-2.jpg";
-import g3 from "@/assets/gallery-3.jpg";
-import g4 from "@/assets/gallery-4.jpg";
-import g5 from "@/assets/gallery-5.jpg";
-import g6 from "@/assets/gallery-6.jpg";
-import g7 from "@/assets/gallery-7.jpg";
-import g8 from "@/assets/gallery-8.jpg";
-
-const IMAGES = [
-  { src: g2, caption: "Lagos, golden hour" },
-  { src: g1, caption: "Two hands, one promise" },
-  { src: g6, caption: "Down the cloister" },
-  { src: g4, caption: "The bouquet" },
-  { src: g7, caption: "The traditional" },
-  { src: g5, caption: "The ballroom set" },
-  { src: g3, caption: "Letters, ninety-two days" },
-  { src: g8, caption: "The cake" },
-];
+const IMAGES = gallery.images.map((g) => ({ src: img(g.image), caption: g.caption }));
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Gallery #TiwaSaidYes — Eniolaoluwa & Tiwalade" },
+      { title: `Gallery ${site.hashtag} — ${site.bride.first} & ${site.groom.first}` },
       { name: "description", content: "Quiet evidence of the years that brought us here." },
-      { property: "og:title", content: "Gallery #TiwaSaidYes" },
+      { property: "og:title", content: `Gallery ${site.hashtag}` },
       { property: "og:description", content: "Quiet evidence of the years that brought us here." },
-      { property: "og:image", content: g2 },
+      { property: "og:image", content: img(gallery.images[0].image) },
     ],
   }),
   component: Gallery,
@@ -43,8 +28,8 @@ function Gallery() {
   return (
     <SectionWrapper ground="ivory">
       <div className="text-center">
-        <Eyebrow>Join the story</Eyebrow>
-        <DisplayTitle className="mt-4">#TiwaSaidYes</DisplayTitle>
+        <Eyebrow>{gallery.eyebrow}</Eyebrow>
+        <DisplayTitle className="mt-4">{site.hashtag}</DisplayTitle>
         <GoldHairline withCipher wide />
         <p className="font-display italic text-lg max-w-xl mx-auto text-charcoal/80">
           A small archive of the moments before the moment.

@@ -44,7 +44,7 @@ export function GiftCard({
         <div className="mt-6">
           <div className="flex items-baseline justify-between text-xs font-ceremonial tracking-[0.2em] text-emerald-deep">
             <span>{NGN.format(item.raised)}</span>
-            <span className="text-gold">of {NGN.format(item.goal)}</span>
+            <span className="text-gold-deep">of {NGN.format(item.goal)}</span>
           </div>
           <div className="mt-2 h-px w-full bg-gold/25 overflow-hidden">
             <div

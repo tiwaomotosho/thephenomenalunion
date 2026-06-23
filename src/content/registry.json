@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "id": "kettle", "name": "The Morning Kettle", "description": "For the first cup of tea in our new kitchen — quiet, gilded, ours.", "category": "Kitchen", "goal": 120000, "raised": 64000, "image": "gallery-8" },
+    { "id": "espresso", "name": "Espresso Set", "description": "Italian-made, brass-trimmed. The Saturday morning ritual.", "category": "Kitchen", "goal": 380000, "raised": 380000, "image": "gallery-5" },
+    { "id": "dinnerware", "name": "Ivory Dinnerware", "description": "Twelve settings of bone china with a hand-painted gilt rim.", "category": "Kitchen", "goal": 540000, "raised": 210000, "image": "gallery-4" },
+    { "id": "linens", "name": "Linen Bedding", "description": "Soft Portuguese linen for slow Sunday mornings.", "category": "Bedroom", "goal": 280000, "raised": 95000, "image": "gallery-1" },
+    { "id": "armchair", "name": "The Reading Armchair", "description": "Deep emerald velvet — the corner where evenings will go.", "category": "Living Room", "goal": 720000, "raised": 180000, "image": "gallery-5" },
+    { "id": "rug", "name": "Persian Rug", "description": "A hand-knotted runner to warm the hallway between us.", "category": "Living Room", "goal": 950000, "raised": 0, "image": "gallery-4" },
+    { "id": "washer", "name": "Front-Load Washer", "description": "Quiet, efficient, blessedly boring. The grown-up gift.", "category": "Laundry", "goal": 1100000, "raised": 460000, "image": "gallery-8" },
+    { "id": "iron", "name": "Steam Press", "description": "Crisp shirts on Sunday nights for the week ahead.", "category": "Laundry", "goal": 180000, "raised": 180000, "image": "gallery-1" }
+  ]
+}

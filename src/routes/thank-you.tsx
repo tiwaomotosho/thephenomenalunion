@@ -2,11 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SectionWrapper, Eyebrow } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { Seal } from "@/components/heraldry/Seal";
+import site from "@/content/site.json";
 
 export const Route = createFileRoute("/thank-you")({
   head: () => ({
     meta: [
-      { title: "Thank you — Eniolaoluwa & Tiwalade" },
+      { title: `Thank you — ${site.bride.first} & ${site.groom.first}` },
       { name: "description", content: "Sealed with thanks." },
       { property: "og:title", content: "Thank you" },
       { property: "og:description", content: "Sealed with thanks." },
@@ -32,7 +33,7 @@ function ThankYou() {
           deeply, grateful — and we look forward to thanking you in person on
           the twenty-seventh of August.
         </p>
-        <p className="font-script text-5xl text-gold mt-10">Eni &amp; Tiwa</p>
+        <p className="font-script text-5xl text-gold mt-10">{site.signature}</p>
 
         <div className="mt-12 flex flex-wrap justify-center gap-4">
           <Link to="/" className="btn-royal">Return home</Link>
