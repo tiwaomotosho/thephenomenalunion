@@ -1,19 +1,20 @@
 {
   "eyebrow": "The Venue",
-  "title": "The Venue",
-  "name": "Chapel of St. Saviour",
-  "subname": "& The Grand Ballroom",
-  "blurb": "A nineteenth-century stone chapel set within a private garden, connected by a cloister to the ballroom — the same roof from vows to last dance.",
-  "address": "12 Cathedral Lane, Ikoyi, Lagos",
-  "phone": "+234 (0) 808 555 0142",
-  "parking": "Valet parking from 09:00",
-  "mapUrl": "https://maps.google.com",
+  "title": "The Garden",
+  "name": "Redemption Camp",
+  "subname": "A Garden Wedding",
+  "blurb": "We will marry beneath the trees at Redemption Camp, where the lawns are wide and the morning light is kind. Everything happens in one garden, from the first hymn to the last dance.",
+  "address": "Redemption Camp, Mowe, Ogun State",
+  "phone": "+234 808 555 0142",
+  "openLine": "The day begins at 10 in the morning",
+  "mapsLink": "https://www.google.com/maps/search/?api=1&query=Redemption+Camp+Mowe+Ogun+State",
+  "mapEmbed": "https://www.google.com/maps?q=Redemption%20Camp%2C%20Mowe%2C%20Ogun%20State&output=embed",
   "dressCode": {
-    "title": "Black tie & traditional",
-    "body": "Floor-length, agbada, gele, dinner jacket. Ivory, emerald, oxblood, gold — the house palette."
+    "title": "Garden formal",
+    "body": "Long dresses, agbada, gele, and a well cut suit. Wear the house colours where you can: ivory, emerald, and gold. Kind shoes for soft grass are wise."
   },
   "children": {
-    "title": "An adults-only celebration",
-    "body": "With the warm exception of those listed on your invitation."
+    "title": "A celebration for all ages",
+    "body": "Little ones are welcome to play on the lawn, with a quiet corner set aside for tired feet."
   }
 }

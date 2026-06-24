@@ -60,7 +60,7 @@ export function NotesWall() {
           </button>
           {sent && (
             <p className="text-xs font-ceremonial tracking-[0.25em] text-emerald-deep animate-royal-fade">
-              ❖ Received with thanks — pending approval
+              ❖ Received with thanks, pending approval
             </p>
           )}
         </div>

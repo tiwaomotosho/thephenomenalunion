@@ -9,7 +9,7 @@ import faq from "@/content/faq.json";
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: `FAQ — ${site.bride.first} & ${site.groom.first}` },
+      { title: `FAQ · ${site.bride.first} & ${site.groom.first}` },
       { name: "description", content: "Dress code, children, parking, and other gentle matters." },
       { property: "og:title", content: "Frequently Asked" },
       { property: "og:description", content: "Dress code, children, parking, and other gentle matters." },

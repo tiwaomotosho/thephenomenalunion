@@ -18,7 +18,7 @@ const TABS: ("All" | RegistryCategory | "Sealed")[] = [
 export const Route = createFileRoute("/registry")({
   head: () => ({
     meta: [
-      { title: `Blessings & Registry — ${site.bride.first} & ${site.groom.first}` },
+      { title: `Blessings & Registry · ${site.bride.first} & ${site.groom.first}` },
       { name: "description", content: `Contribute toward the first home of ${site.bride.first} & ${site.groom.first}. A blessing, not a transaction.` },
       { property: "og:title", content: "Blessings & Registry" },
       { property: "og:description", content: "A blessing for the first home. The gift persists beyond the day." },

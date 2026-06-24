@@ -28,6 +28,7 @@ export function ParallaxFrame({
   onClick?: () => void;
 }) {
   const scope = useRef<HTMLElement>(null);
+  const frame = useRef<HTMLButtonElement>(null);
   const photo = useRef<HTMLDivElement>(null);
   const img = useRef<HTMLImageElement>(null);
   const gilt = useRef<SVGRectElement>(null);
@@ -39,6 +40,20 @@ export function ParallaxFrame({
       gsap.registerPlugin(ScrollTrigger);
       const trigger = scope.current;
 
+      // the picture is "hung": it drops in and swings on its top edge before
+      // settling, like a real frame finding its place on the wall
+      gsap.fromTo(
+        frame.current,
+        { y: -18, rotation: -3 },
+        {
+          y: 0,
+          rotation: 0,
+          transformOrigin: "50% 0%",
+          duration: 1.5,
+          ease: "elastic.out(1, 0.5)",
+          scrollTrigger: { trigger, start: "top 85%", once: true },
+        },
+      );
       gsap.fromTo(
         photo.current,
         { clipPath: "inset(100% 0 0 0)" },
@@ -88,7 +103,7 @@ export function ParallaxFrame({
 
   return (
     <figure ref={scope} className={`ed-slot ${className}`} style={style}>
-      <button type="button" onClick={onClick} className="rph-frame" aria-label={`View photo: ${caption}`}>
+      <button ref={frame} type="button" onClick={onClick} className="rph-frame" aria-label={`View photo: ${caption}`}>
         <div className="rph-mat">
           <div className="rph-photo" ref={photo} style={{ aspectRatio }}>
             <img ref={img} src={src} alt={caption} loading="lazy" />

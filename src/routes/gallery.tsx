@@ -13,10 +13,10 @@ const IMAGES = gallery.images.map((g) => ({ src: img(g.image), caption: g.captio
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: `Gallery ${site.hashtag} — ${site.bride.first} & ${site.groom.first}` },
-      { name: "description", content: "Frames from our forever — the moments before the moment." },
+      { title: `Gallery ${site.hashtag} · ${site.bride.first} & ${site.groom.first}` },
+      { name: "description", content: "Frames from our forever, the quiet moments before the moment." },
       { property: "og:title", content: `Gallery ${site.hashtag}` },
-      { property: "og:description", content: "Frames from our forever — the moments before the moment." },
+      { property: "og:description", content: "Frames from our forever, the quiet moments before the moment." },
       { property: "og:image", content: img(gallery.images[0].image) },
     ],
   }),
@@ -44,18 +44,18 @@ function Gallery() {
   }, [open, close, step]);
 
   return (
-    <SectionWrapper ground="emerald">
+    <SectionWrapper ground="ivory" className="portrait-wall">
       <div className="text-center">
-        <Eyebrow className="!text-gold-soft">{gallery.eyebrow}</Eyebrow>
-        <DisplayTitle inverse className="mt-4">{site.hashtag}</DisplayTitle>
+        <Eyebrow>{gallery.eyebrow}</Eyebrow>
+        <DisplayTitle className="mt-4">{site.hashtag}</DisplayTitle>
         <GoldHairline withCipher wide />
-        <p className="font-display italic text-lg max-w-xl mx-auto text-ivory/75">
-          A portrait hall of our forever — hung frame by frame.
-          Tap any picture to open it; arrow keys to wander the gallery.
+        <p className="font-display italic text-lg max-w-xl mx-auto text-charcoal/80">
+          A portrait hall of our forever, hung frame by frame.
+          Tap any picture to open it, or use the arrow keys to wander the gallery.
         </p>
       </div>
 
-      {/* The portrait hall: gilt-framed pictures on an emerald wall. */}
+      {/* The portrait hall: gilt-framed pictures hung on a plaster wall. */}
       <div className="mt-16 sm:mt-24">
         <GalleryEditorial images={IMAGES} onOpen={setOpen} />
       </div>
@@ -63,7 +63,7 @@ function Gallery() {
       {open !== null && (
         <div
           data-lenis-prevent
-          className="fixed inset-0 z-50 grid place-items-center bg-emerald-ink/92 backdrop-blur-sm p-4 animate-royal-fade"
+          className="fixed inset-0 z-50 grid place-items-center bg-emerald-deep/45 backdrop-blur-2xl p-4 animate-royal-fade"
           onClick={close}
         >
           <button

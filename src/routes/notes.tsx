@@ -7,8 +7,8 @@ import site from "@/content/site.json";
 export const Route = createFileRoute("/notes")({
   head: () => ({
     meta: [
-      { title: `Notes Wall — ${site.bride.first} & ${site.groom.first}` },
-      { name: "description", content: "Leave a blessing for the table; read those of others." },
+      { title: `Notes Wall · ${site.bride.first} & ${site.groom.first}` },
+      { name: "description", content: "Leave a blessing for the table, and read those of others." },
       { property: "og:title", content: "Notes Wall" },
       { property: "og:description", content: "A guestbook of blessings for the couple." },
     ],
@@ -24,8 +24,8 @@ function NotesPage() {
         <DisplayTitle className="mt-4">The Notes Wall</DisplayTitle>
         <GoldHairline withCipher wide />
         <p className="font-display italic text-lg max-w-xl mx-auto text-charcoal/80">
-          A small open guestbook. Leave a memory, a prayer, a wish — we will
-          read each one before the day.
+          A small open guestbook. Leave a memory, a prayer, or a wish,
+          and we will read each one before the day.
         </p>
       </div>
 

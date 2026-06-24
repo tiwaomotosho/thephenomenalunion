@@ -8,10 +8,10 @@ import schedule from "@/content/schedule.json";
 export const Route = createFileRoute("/schedule")({
   head: () => ({
     meta: [
-      { title: `Order of the Day — ${site.bride.first} & ${site.groom.first}` },
-      { name: "description", content: `The full procession for ${site.date.display} — ceremony, reception, and after-party.` },
-      { property: "og:title", content: `Order of the Day — ${site.date.display}` },
-      { property: "og:description", content: `The full procession for the wedding of ${site.bride.first} & ${site.groom.first}.` },
+      { title: `Order of the Day · ${site.bride.first} & ${site.groom.first}` },
+      { name: "description", content: `The order of the day for ${site.date.display}. One garden, from the first hymn to the last dance.` },
+      { property: "og:title", content: `Order of the Day · ${site.date.display}` },
+      { property: "og:description", content: `The order of the day for the wedding of ${site.bride.first} & ${site.groom.first}.` },
     ],
   }),
   component: Schedule,
@@ -27,8 +27,8 @@ function Schedule() {
         <DisplayTitle className="mt-4">Order of the Day</DisplayTitle>
         <GoldHairline withCipher wide />
         <p className="font-display italic text-lg max-w-xl mx-auto text-charcoal/80">
-          Thursday, {site.date.long}.
-          A single, unhurried day from morning tea to last dance.
+          Thursday, {site.date.long}. One unhurried day in the garden,
+          from the first hymn to the last dance.
         </p>
       </div>
 
