@@ -218,7 +218,7 @@ function BridalParty() {
 const PREVIEWS = [
   { to: "/schedule", eyebrow: "VI", title: "Order of the Day", body: "Ceremony, reception, and the after-party — the full procession." },
   { to: "/venue", eyebrow: "VII", title: "The Venue", body: "Where to be and how to arrive on the day." },
-  { to: "/gallery", eyebrow: "IX", title: "Gallery — #TiwaSaidYes", body: "Quiet evidence of the years that brought us here." },
+  { to: "/gallery", eyebrow: "IX", title: "Gallery — #EniSaidYes", body: "Quiet evidence of the years that brought us here." },
   { to: "/registry", eyebrow: "X", title: "Blessings & Registry", body: "Small contributions toward the first home we will share." },
   { to: "/notes", eyebrow: "XI", title: "Notes Wall", body: "Leave a blessing for the table; read those of others." },
   { to: "/faq", eyebrow: "XIII", title: "Frequently Asked", body: "Dress code, children, parking, and other gentle matters." },

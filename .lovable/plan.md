@@ -25,7 +25,7 @@ A static, royally-styled wedding site for **Eniolaoluwa & Tiwalade** (cipher **E
 6. Order of the Day          — schedule (ceremony, reception, after-party)
 7. The Venue                 — map placeholder, dress code, directions
 8. Travel & Stay             — hotel cards, transport notes
-9. Gallery (#TiwaSaidYes)    — masonry + lightbox
+9. Gallery (#EniSaidYes)    — masonry + lightbox
 10. Registry / Blessings     — filter tabs, contribute modal (mock Paystack),
                                progress hairline, seal closes funded items
 11. Notes Wall               — moderated guestbook (mock submit + approval state)
