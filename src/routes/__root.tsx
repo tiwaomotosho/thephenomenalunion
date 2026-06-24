@@ -17,6 +17,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { BackToTop } from "@/components/layout/BackToTop";
 import { Crest } from "@/components/heraldry/Crest";
+import { Splash } from "@/components/splash/Splash";
 
 function NotFoundComponent() {
   return (
@@ -115,6 +116,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Splash />
       <Header />
       <main className="min-h-screen pt-[72px]">
         <Outlet />
