@@ -77,11 +77,12 @@ export function Splash() {
 
       <div className="splash-stage">
         <div className="splash-centre">
-          <span className="splash-monogram">E&nbsp;&amp;&nbsp;T</span>
-          <Castle />
+          <div className="splash-castle-wrap">
+            <span className="splash-monogram">E&nbsp;&amp;&nbsp;T</span>
+            <Castle />
+          </div>
+          <span className="splash-motto">The Phenomenal Union</span>
         </div>
-
-        <span className="splash-motto">The Phenomenal Union</span>
       </div>
     </div>
   );
@@ -131,10 +132,16 @@ const CSS = `
 .splash-centre {
   position: absolute;
   left: 50%;
-  top: 38%;
+  top: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
-  max-width: 80vw;
+  width: clamp(320px, 84vw, 430px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.splash-castle-wrap {
+  position: relative;
+  width: 100%;
 }
 .splash-castle {
   position: relative;
@@ -153,7 +160,7 @@ const CSS = `
   left: 50%;
   transform: translate(-50%, 20px);
   font-family: "Pinyon Script", cursive;
-  font-size: clamp(5rem, 22vw, 11rem);
+  font-size: clamp(6rem, 26vw, 13rem);
   line-height: 1;
   color: #c9a961;
   opacity: 0;
@@ -162,15 +169,13 @@ const CSS = `
 }
 
 .splash-motto {
-  position: absolute;
-  left: 50%;
-  bottom: 14vh;
-  transform: translateX(-50%);
+  margin-top: clamp(1.25rem, 3.5vh, 2.25rem);
   font-family: "Cinzel", serif;
   text-transform: uppercase;
   letter-spacing: 0.34em;
   font-size: clamp(0.7rem, 1.4vw, 0.95rem);
   color: #7a5f28;
+  text-align: center;
   white-space: nowrap;
   opacity: 0;
   animation: splashFade 1s ease 2.3s forwards;
@@ -181,8 +186,8 @@ const CSS = `
   to   { clip-path: inset(0% 0 0 0); }
 }
 @keyframes splashEmerge {
-  from { opacity: 0; transform: translate(-50%, 28px); }
-  to   { opacity: 1; transform: translate(-50%, -86%); }
+  from { opacity: 0; transform: translate(-50%, 24px); }
+  to   { opacity: 1; transform: translate(-50%, -60%); }
 }
 @keyframes splashFade {
   from { opacity: 0; }

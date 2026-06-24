@@ -9,7 +9,7 @@ export const splashConfig = {
    * then everything lingers until this total elapses. Try values between
    * 8000 and 10000 to taste.
    */
-  durationMs: 9000,
+  durationMs: 6500,
 
   /** Do not show the splash again within this window, per browser. */
   showEveryMs: 1000 * 60 * 60 * 12,

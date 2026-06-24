@@ -282,6 +282,28 @@ html.splash-pending::before {
   background: radial-gradient(120% 80% at 50% 0%, #fffdf7 0%, #fbf7ee 45%, #f4eedc 100%);
 }
 
+/* ───────────── Auto-scrolling marquee (Court of Honour) ───────────── */
+.marquee {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+  /* fade the row in and out at the edges */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.marquee::-webkit-scrollbar { display: none; }
+.marquee.is-grabbing { cursor: grabbing; }
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+.marquee-item {
+  flex: 0 0 auto;
+  user-select: none;
+}
+
 /* ───────────── Lenis smooth scroll ───────────── */
 html.lenis,
 html.lenis body { height: auto; }

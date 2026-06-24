@@ -4,6 +4,7 @@ import { Cipher } from "@/components/heraldry/Cipher";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { Countdown } from "@/components/Countdown";
+import { Marquee } from "@/components/Marquee";
 import { img } from "@/content/images";
 import site from "@/content/site.json";
 import story from "@/content/story.json";
@@ -200,17 +201,24 @@ function BridalParty() {
         <GoldHairline withCipher wide />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-14">
-        {party.members.map((p) => (
-          <div key={p.name} className="text-center">
-            <div className="grid place-items-center h-20 w-20 mx-auto rounded-full bg-paper border border-gold/40">
-              <Cipher size={32} />
+      <div className="mt-14">
+        <Marquee
+          items={party.members}
+          getKey={(p) => p.name}
+          renderItem={(p) => (
+            <div className="text-center w-40 px-4">
+              <div className="grid place-items-center h-20 w-20 mx-auto rounded-full bg-paper border border-gold/40">
+                <Cipher size={32} />
+              </div>
+              <p className="eyebrow mt-5 !text-[0.6rem]">{p.role}</p>
+              <p className="font-display text-lg mt-2 text-emerald-ink">{p.name}</p>
             </div>
-            <p className="eyebrow mt-5 !text-[0.6rem]">{p.role}</p>
-            <p className="font-display text-lg mt-2 text-emerald-ink">{p.name}</p>
-          </div>
-        ))}
+          )}
+        />
       </div>
+      <p className="mt-8 text-center font-ceremonial text-[0.6rem] tracking-[0.3em] text-charcoal/40">
+        Drag or swipe to meet them all
+      </p>
     </SectionWrapper>
   );
 }
