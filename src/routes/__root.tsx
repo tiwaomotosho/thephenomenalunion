@@ -97,6 +97,14 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        {/* Runs before paint so the site never flashes before the splash. Must
+            mirror the gate in Splash.tsx (12h window + reduced-motion). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{var l=+localStorage.getItem('tpu.splash.v1')||0;var r=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!r&&Date.now()-l>=43200000){document.documentElement.classList.add('splash-pending');}}catch(e){}})();",
+          }}
+        />
       </head>
       <body>
         {children}

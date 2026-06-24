@@ -270,6 +270,18 @@
   }
 }
 
+/* Pre-paint splash cover: an inline script in the document head adds
+   .splash-pending before hydration, so the site never flashes before the
+   React splash overlay mounts. The splash removes it once it is on screen. */
+html.splash-pending body { overflow: hidden; }
+html.splash-pending::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: radial-gradient(120% 80% at 50% 0%, #fffdf7 0%, #fbf7ee 45%, #f4eedc 100%);
+}
+
 /* ───────────── Lenis smooth scroll ───────────── */
 html.lenis,
 html.lenis body { height: auto; }
