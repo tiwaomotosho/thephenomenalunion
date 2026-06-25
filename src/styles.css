@@ -144,6 +144,39 @@ html[data-theme="royal"] {
   --ring: #c9a961;
 }
 
+html[data-theme="blush"] {
+  /* Blush — Pink & Green, pink majority. The dominant dark ground is a deep
+     plum-rose (so the "ink" sections read pink, not green); green is the
+     accent, and the gold crest sits comfortably against both. */
+  --ivory: #fbf3f3; /* blush white */
+  --paper: #f6e6e7; /* soft pink cream */
+  --emerald-deep: #743a55; /* plum-rose, medium */
+  --emerald-ink: #5e2740; /* deep plum-rose, dominant dark ground */
+  --gold-champagne: #5f8a52; /* sage green — decorative; AA-large on light */
+  --gold-soft: #bcd9ac; /* light sage — bright on plum grounds */
+  --gold-deep: #3a5a40; /* deep green — small text on light (AA ~7:1) */
+  --oxblood: #7d3346;
+  --charcoal: #3a2b30;
+  --ink: #1a1a1a;
+
+  --background: #fbf3f3;
+  --foreground: #5e2740;
+  --card-foreground: #5e2740;
+  --popover-foreground: #5e2740;
+  --primary: #743a55;
+  --primary-foreground: #fbf3f3;
+  --secondary: #f6e6e7;
+  --secondary-foreground: #5e2740;
+  --muted: #efdcde;
+  --accent: #5f8a52;
+  --accent-foreground: #fbf3f3;
+  --destructive: #7d3346;
+  --destructive-foreground: #fbf3f3;
+  --border: rgba(95, 138, 82, 0.3);
+  --input: rgba(95, 138, 82, 0.4);
+  --ring: #5f8a52;
+}
+
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }

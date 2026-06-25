@@ -53,6 +53,17 @@ function ensureSeeded() {
 }
 
 export async function listNotes(): Promise<Note[]> {
+  if (NOTES_ENDPOINT) {
+    try {
+      const res = await fetch(`${NOTES_ENDPOINT}?action=list`);
+      const data = (await res.json()) as { notes?: Note[] };
+      return (data.notes ?? [])
+        .filter((n) => n.approved)
+        .sort((a, b) => b.createdAt - a.createdAt);
+    } catch {
+      /* fall back to local storage below */
+    }
+  }
   await sleep(LATENCY());
   ensureSeeded();
   const all = read<StoredNote[]>(NOTES_KEY, NOTES_SEED);
@@ -60,6 +71,24 @@ export async function listNotes(): Promise<Note[]> {
 }
 
 export async function submitNote(input: { name: string; message: string }): Promise<{ ok: true; pending: boolean }> {
+  if (NOTES_ENDPOINT) {
+    try {
+      // text/plain keeps this a "simple" request, so the browser skips the
+      // CORS preflight that Apps Script web apps do not answer.
+      await fetch(NOTES_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({
+          action: "add",
+          name: input.name.trim() || "Anonymous",
+          message: input.message.trim(),
+        }),
+      });
+      return { ok: true, pending: true };
+    } catch {
+      /* fall back to local storage below */
+    }
+  }
   await sleep(LATENCY() + 200);
   ensureSeeded();
   const all = read<StoredNote[]>(NOTES_KEY, NOTES_SEED);
