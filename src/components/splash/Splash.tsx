@@ -93,13 +93,13 @@ function Castle() {
   return (
     <svg className="splash-castle" viewBox="0 0 300 210" role="img" aria-label="A royal castle">
       <g stroke="#c9a961" strokeWidth="2" strokeLinejoin="round">
-        <rect x="62" y="104" width="40" height="82" fill="#0b3b2e" />
-        <path d="M62 104 v-12 h9 v8 h9 v-8 h9 v8 h9 v-8 h4 v12" fill="#0b3b2e" />
-        <rect x="198" y="104" width="40" height="82" fill="#0b3b2e" />
-        <path d="M198 104 v-12 h9 v8 h9 v-8 h9 v8 h9 v-8 h4 v12" fill="#0b3b2e" />
-        <rect x="112" y="74" width="76" height="112" fill="#0b3b2e" />
-        <path d="M112 74 v-14 h11 v9 h10 v-9 h11 v9 h11 v-9 h11 v9 h11 v-9 h0 v14" fill="#0b3b2e" />
-        <path d="M134 186 v-26 a16 16 0 0 1 32 0 v26 Z" fill="#06241b" stroke="#c9a961" strokeWidth="2" />
+        <rect x="62" y="104" width="40" height="82" className="ct-stone" />
+        <path d="M62 104 v-12 h9 v8 h9 v-8 h9 v8 h9 v-8 h4 v12" className="ct-stone" />
+        <rect x="198" y="104" width="40" height="82" className="ct-stone" />
+        <path d="M198 104 v-12 h9 v8 h9 v-8 h9 v8 h9 v-8 h4 v12" className="ct-stone" />
+        <rect x="112" y="74" width="76" height="112" className="ct-stone" />
+        <path d="M112 74 v-14 h11 v9 h10 v-9 h11 v9 h11 v-9 h11 v9 h11 v-9 h0 v14" className="ct-stone" />
+        <path d="M134 186 v-26 a16 16 0 0 1 32 0 v26 Z" className="ct-gate" stroke="#c9a961" strokeWidth="2" />
         <rect x="146" y="96" width="8" height="16" rx="4" fill="#e6c98a" stroke="none" />
         <rect x="77" y="124" width="6" height="13" rx="3" fill="#e6c98a" stroke="none" />
         <rect x="213" y="124" width="6" height="13" rx="3" fill="#e6c98a" stroke="none" />
@@ -119,13 +119,17 @@ const CSS = `
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: radial-gradient(120% 80% at 50% 0%, #fffdf7 0%, #fbf7ee 45%, #f4eedc 100%);
+  background: radial-gradient(125% 85% at 50% 0%, var(--ivory) 0%, var(--ivory) 45%, var(--paper) 100%);
   overflow: hidden;
   transform: translateY(0);
   transition: transform 1s cubic-bezier(0.7, 0, 0.2, 1);
   will-change: transform;
 }
 .splash-up { transform: translateY(-100%); }
+
+/* castle stone follows the active colour scheme; the gold trim stays gold */
+.splash-castle .ct-stone { fill: var(--emerald-deep); }
+.splash-castle .ct-gate { fill: var(--emerald-ink); }
 
 .splash-stage { position: absolute; inset: 0; }
 

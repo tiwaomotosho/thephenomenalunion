@@ -11,29 +11,24 @@ import { useEffect, useState } from "react";
 const KEY = "tpu.theme";
 type Theme = "garden" | "blush" | "royal";
 
-const ORDER: Theme[] = ["garden", "blush", "royal"];
+const ORDER: Theme[] = ["blush", "garden", "royal"];
 const META: Record<Theme, { label: string; dots: [string, string] }> = {
-  garden: { label: "Garden", dots: ["#3f5f48", "#f4c2c2"] },
   blush: { label: "Blush", dots: ["#a84a6a", "#7aa06a"] },
+  garden: { label: "Garden", dots: ["#3f5f48", "#f4c2c2"] },
   royal: { label: "Royal", dots: ["#e6c98a", "#0b3b2e"] },
 };
 
-function apply(next: Theme) {
-  if (next === "garden") document.documentElement.removeAttribute("data-theme");
-  else document.documentElement.setAttribute("data-theme", next);
-}
-
 export function ThemeToggle({ className = "" }: { className?: string }) {
-  const [theme, setTheme] = useState<Theme>("garden");
+  const [theme, setTheme] = useState<Theme>("blush");
 
   useEffect(() => {
     const attr = document.documentElement.getAttribute("data-theme");
-    setTheme(attr === "royal" || attr === "blush" ? attr : "garden");
+    setTheme(attr === "royal" || attr === "garden" ? attr : "blush");
   }, []);
 
   const cycle = () => {
     const next = ORDER[(ORDER.indexOf(theme) + 1) % ORDER.length];
-    apply(next);
+    document.documentElement.setAttribute("data-theme", next);
     try {
       window.localStorage.setItem(KEY, next);
     } catch {

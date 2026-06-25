@@ -74,36 +74,68 @@
  *   - gold-champagne → larger decorative accent (passes AA-large on light)
  *   - gold-soft   → bright accent on dark grounds
  *   - ivory / paper → light grounds
- * Default is the Garden (Green & Pink) scheme; [data-theme="royal"] restores
- * the original emerald-and-gold palette.
+ * Default is the Blush (Pink & Green, pink majority) scheme; [data-theme="garden"]
+ * is the green-majority variant and [data-theme="royal"] the emerald-and-gold one.
  */
 :root {
-  /* Garden — Green & Pink (default) */
-  --ivory: #f9f6ee;
-  --paper: #f1e9dd;
-  --emerald-deep: #3f5f48;
-  --emerald-ink: #2f4a37;
-  --gold-champagne: #b86a85; /* rose — decorative; AA-large on light */
-  --gold-soft: #f4c2c2; /* blush — bright on green grounds */
-  --gold-deep: #8a4250; /* deep rose — small text on light (AA ~6:1) */
+  /* Blush — Pink & Green, pink majority (DEFAULT). The dominant dark ground is
+     a deep plum-rose, green is the accent, and the gold crest harmonises. */
+  --ivory: #fbf3f3; /* blush white */
+  --paper: #f6e6e7; /* soft pink cream */
+  --emerald-deep: #743a55; /* plum-rose, medium */
+  --emerald-ink: #5e2740; /* deep plum-rose, dominant dark ground */
+  --gold-champagne: #5f8a52; /* sage green — decorative; AA-large on light */
+  --gold-soft: #bcd9ac; /* light sage — bright on plum grounds */
+  --gold-deep: #3a5a40; /* deep green — small text on light (AA ~7:1) */
   --oxblood: #7d3346;
-  --charcoal: #2f2b28;
+  --charcoal: #3a2b30;
   --ink: #1a1a1a;
   --gilt: linear-gradient(135deg, #b8862f 0%, #e6c36a 45%, #b8862f 100%);
 
   --radius: 0.5rem;
+  --background: #fbf3f3;
+  --foreground: #5e2740;
+  --card: #ffffff;
+  --card-foreground: #5e2740;
+  --popover: #ffffff;
+  --popover-foreground: #5e2740;
+  --primary: #743a55;
+  --primary-foreground: #fbf3f3;
+  --secondary: #f6e6e7;
+  --secondary-foreground: #5e2740;
+  --muted: #efdcde;
+  --muted-foreground: #5a5347;
+  --accent: #5f8a52;
+  --accent-foreground: #fbf3f3;
+  --destructive: #7d3346;
+  --destructive-foreground: #fbf3f3;
+  --border: rgba(95, 138, 82, 0.3);
+  --input: rgba(95, 138, 82, 0.4);
+  --ring: #5f8a52;
+}
+
+html[data-theme="garden"] {
+  /* Garden — Green & Pink (green majority) */
+  --ivory: #f9f6ee;
+  --paper: #f1e9dd;
+  --emerald-deep: #3f5f48;
+  --emerald-ink: #2f4a37;
+  --gold-champagne: #b86a85;
+  --gold-soft: #f4c2c2;
+  --gold-deep: #8a4250;
+  --oxblood: #7d3346;
+  --charcoal: #2f2b28;
+  --ink: #1a1a1a;
+
   --background: #f9f6ee;
   --foreground: #2f4a37;
-  --card: #ffffff;
   --card-foreground: #2f4a37;
-  --popover: #ffffff;
   --popover-foreground: #2f4a37;
   --primary: #3f5f48;
   --primary-foreground: #f9f6ee;
   --secondary: #f1e9dd;
   --secondary-foreground: #2f4a37;
   --muted: #ece2d6;
-  --muted-foreground: #5a5347;
   --accent: #b86a85;
   --accent-foreground: #f9f6ee;
   --destructive: #7d3346;
@@ -144,38 +176,8 @@ html[data-theme="royal"] {
   --ring: #c9a961;
 }
 
-html[data-theme="blush"] {
-  /* Blush — Pink & Green, pink majority. The dominant dark ground is a deep
-     plum-rose (so the "ink" sections read pink, not green); green is the
-     accent, and the gold crest sits comfortably against both. */
-  --ivory: #fbf3f3; /* blush white */
-  --paper: #f6e6e7; /* soft pink cream */
-  --emerald-deep: #743a55; /* plum-rose, medium */
-  --emerald-ink: #5e2740; /* deep plum-rose, dominant dark ground */
-  --gold-champagne: #5f8a52; /* sage green — decorative; AA-large on light */
-  --gold-soft: #bcd9ac; /* light sage — bright on plum grounds */
-  --gold-deep: #3a5a40; /* deep green — small text on light (AA ~7:1) */
-  --oxblood: #7d3346;
-  --charcoal: #3a2b30;
-  --ink: #1a1a1a;
-
-  --background: #fbf3f3;
-  --foreground: #5e2740;
-  --card-foreground: #5e2740;
-  --popover-foreground: #5e2740;
-  --primary: #743a55;
-  --primary-foreground: #fbf3f3;
-  --secondary: #f6e6e7;
-  --secondary-foreground: #5e2740;
-  --muted: #efdcde;
-  --accent: #5f8a52;
-  --accent-foreground: #fbf3f3;
-  --destructive: #7d3346;
-  --destructive-foreground: #fbf3f3;
-  --border: rgba(95, 138, 82, 0.3);
-  --input: rgba(95, 138, 82, 0.4);
-  --ring: #5f8a52;
-}
+/* "blush" is the default (:root), so html[data-theme="blush"] needs no block —
+   it simply falls back to :root. */
 
 @layer base {
   * { border-color: var(--color-border); }
@@ -410,7 +412,7 @@ html.lenis body { height: auto; }
   transform-origin: 50% 0%;
 }
 .rph-mat {
-  background: #fdfaf2;
+  background: var(--ivory);
   padding: clamp(13px, 2vw, 26px);
   box-shadow:
     0 1px 1px rgba(60, 45, 15, 0.2),
@@ -466,10 +468,10 @@ html.lenis body { height: auto; }
   color: var(--gold-deep);
 }
 
-/* The gallery wall: warm plaster, a hair deeper than the ivory mats so each
-   framed picture lifts off it. Close to the site's light ground, wall-like. */
+/* The gallery wall: themed plaster, a hair deeper than the ivory mats so each
+   framed picture lifts off it. Follows the active colour scheme. */
 section.portrait-wall {
-  background-color: #e7ddc6;
+  background-color: var(--muted);
   background-image:
     radial-gradient(125% 90% at 50% 0%, rgba(255, 253, 247, 0.7), transparent 62%),
     radial-gradient(rgba(70, 55, 25, 0.04) 1px, transparent 1px),
