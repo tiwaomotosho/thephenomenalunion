@@ -65,35 +65,76 @@
   --color-ring: var(--ring);
 }
 
+/*
+ * Two colour schemes share one set of semantic tokens, so contrast roles are
+ * preserved whichever is active:
+ *   - emerald-ink / emerald-deep  → the dark ground + dark headings (high
+ *     contrast on light, white/ivory text reads on them)
+ *   - gold-deep   → small accent text on light grounds (passes WCAG AA)
+ *   - gold-champagne → larger decorative accent (passes AA-large on light)
+ *   - gold-soft   → bright accent on dark grounds
+ *   - ivory / paper → light grounds
+ * Default is the Garden (Green & Pink) scheme; [data-theme="royal"] restores
+ * the original emerald-and-gold palette.
+ */
 :root {
-  /* Royal */
+  /* Garden — Green & Pink (default) */
+  --ivory: #f9f6ee;
+  --paper: #f1e9dd;
+  --emerald-deep: #3f5f48;
+  --emerald-ink: #2f4a37;
+  --gold-champagne: #b86a85; /* rose — decorative; AA-large on light */
+  --gold-soft: #f4c2c2; /* blush — bright on green grounds */
+  --gold-deep: #8a4250; /* deep rose — small text on light (AA ~6:1) */
+  --oxblood: #7d3346;
+  --charcoal: #2f2b28;
+  --ink: #1a1a1a;
+  --gilt: linear-gradient(135deg, #b8862f 0%, #e6c36a 45%, #b8862f 100%);
+
+  --radius: 0.5rem;
+  --background: #f9f6ee;
+  --foreground: #2f4a37;
+  --card: #ffffff;
+  --card-foreground: #2f4a37;
+  --popover: #ffffff;
+  --popover-foreground: #2f4a37;
+  --primary: #3f5f48;
+  --primary-foreground: #f9f6ee;
+  --secondary: #f1e9dd;
+  --secondary-foreground: #2f4a37;
+  --muted: #ece2d6;
+  --muted-foreground: #5a5347;
+  --accent: #b86a85;
+  --accent-foreground: #f9f6ee;
+  --destructive: #7d3346;
+  --destructive-foreground: #f9f6ee;
+  --border: rgba(184, 106, 133, 0.32);
+  --input: rgba(184, 106, 133, 0.42);
+  --ring: #b86a85;
+}
+
+html[data-theme="royal"] {
+  /* Royal — Emerald & Gold (original) */
   --ivory: #fbf7ee;
   --paper: #f4eedc;
   --emerald-deep: #0b3b2e;
   --emerald-ink: #06241b;
   --gold-champagne: #c9a961;
   --gold-soft: #e6c98a;
-  /* Deeper antique gold — small text on light grounds (passes WCAG AA ~5.4:1). */
   --gold-deep: #7a5f28;
   --oxblood: #6b1f2a;
   --charcoal: #2a2a2a;
   --ink: #1a1a1a;
-  --gilt: linear-gradient(135deg, #b8862f 0%, #e6c36a 45%, #b8862f 100%);
 
-  /* shadcn (mapped to royal) */
-  --radius: 0.5rem;
   --background: #fbf7ee;
   --foreground: #06241b;
-  --card: #ffffff;
   --card-foreground: #06241b;
-  --popover: #ffffff;
   --popover-foreground: #06241b;
   --primary: #0b3b2e;
   --primary-foreground: #fbf7ee;
   --secondary: #f4eedc;
   --secondary-foreground: #06241b;
   --muted: #efe7d3;
-  --muted-foreground: #5a5347;
   --accent: #c9a961;
   --accent-foreground: #06241b;
   --destructive: #6b1f2a;

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Cipher } from "@/components/heraldry/Cipher";
 import { Menu, X } from "lucide-react";
 import site from "@/content/site.json";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -85,6 +86,7 @@ export function Header() {
               </Link>
             );
           })}
+          <ThemeToggle />
           <Link to="/registry" className="btn-royal !py-2 !px-5 !text-[0.62rem]">
             Bless Us
           </Link>
@@ -113,9 +115,12 @@ export function Header() {
                 {n.label}
               </Link>
             ))}
-            <Link to="/registry" className="btn-royal mt-2 self-start">
-              Bless Us
-            </Link>
+            <div className="mt-2 flex items-center gap-3">
+              <Link to="/registry" className="btn-royal self-start">
+                Bless Us
+              </Link>
+              <ThemeToggle className="ml-1" />
+            </div>
           </nav>
         </div>
       )}

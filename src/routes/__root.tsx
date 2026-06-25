@@ -102,7 +102,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){try{var l=+localStorage.getItem('tpu.splash.v1')||0;var r=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!r&&Date.now()-l>=43200000){document.documentElement.classList.add('splash-pending');}}catch(e){}})();",
+              "(function(){try{var l=+localStorage.getItem('tpu.splash.v1')||0;var r=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!r&&Date.now()-l>=43200000){document.documentElement.classList.add('splash-pending');}}catch(e){}try{if(localStorage.getItem('tpu.theme')==='royal'){document.documentElement.setAttribute('data-theme','royal');}}catch(e){}})();",
           }}
         />
       </head>

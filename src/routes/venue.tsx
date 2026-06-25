@@ -80,7 +80,7 @@ function Venue() {
           </p>
         </div>
         <div className="bg-paper p-7 border-l-2 border-gold">
-          <p className="eyebrow !text-left">The little ones</p>
+          <p className="eyebrow !text-left">Children</p>
           <p className="font-display text-xl mt-2 text-emerald-ink">{venue.children.title}</p>
           <p className="mt-2 font-display italic text-charcoal/70">
             {venue.children.body}

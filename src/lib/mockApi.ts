@@ -7,7 +7,7 @@
  */
 
 import seal from "@/assets/seal.png";
-import { REGISTRY_SEED, NOTES_SEED } from "@/data/seed";
+import { NOTES_SEED } from "@/data/seed";
 
 const LATENCY = () => 300 + Math.random() * 400;
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
@@ -27,56 +27,6 @@ const write = (key: string, value: unknown) => {
   window.localStorage.setItem(key, JSON.stringify(value));
 };
 
-// ─────────── Registry ───────────
-export type RegistryCategory = "Kitchen" | "Laundry" | "Living Room" | "Bedroom";
-export interface RegistryItem {
-  id: string;
-  name: string;
-  description: string;
-  category: RegistryCategory;
-  goal: number; // NGN
-  raised: number;
-  image: string;
-}
-
-const RG_KEY = "et2026.registry.v1";
-
-export async function getRegistry(): Promise<RegistryItem[]> {
-  await sleep(LATENCY());
-  const overrides = read<Record<string, number>>(RG_KEY, {});
-  return REGISTRY_SEED.map((it) => ({
-    ...it,
-    raised: Math.min(it.goal, (overrides[it.id] ?? 0) + it.raised),
-  }));
-}
-
-export async function contribute(
-  itemId: string,
-  amount: number,
-  donor: { name: string; note?: string },
-): Promise<{ ok: true; sealed: boolean }> {
-  await sleep(LATENCY() + 400);
-  // record toward registry total
-  const overrides = read<Record<string, number>>(RG_KEY, {});
-  overrides[itemId] = (overrides[itemId] ?? 0) + amount;
-  write(RG_KEY, overrides);
-  // record as a guestbook note (auto-approved with seal)
-  const notes = read<StoredNote[]>(NOTES_KEY, []);
-  notes.push({
-    id: `gift-${Date.now()}`,
-    name: donor.name,
-    message: donor.note?.trim() || "A blessing for your new home. ❖",
-    approved: true,
-    createdAt: Date.now(),
-    fromGift: true,
-  });
-  write(NOTES_KEY, notes);
-
-  const items = await getRegistry();
-  const it = items.find((x) => x.id === itemId);
-  return { ok: true, sealed: !!it && it.raised >= it.goal };
-}
-
 export const SEAL_SRC = seal;
 
 // ─────────── Notes Wall ───────────
@@ -91,6 +41,10 @@ export interface Note {
 type StoredNote = Note;
 
 const NOTES_KEY = "et2026.notes.v1";
+
+// When set (see docs/integrations.md), the Notes wall reads/writes a Google
+// Apps Script web app instead of local storage. Left empty, it stays local.
+const NOTES_ENDPOINT = (import.meta.env.VITE_NOTES_ENDPOINT ?? "") as string;
 
 function ensureSeeded() {
   if (!isBrowser) return;

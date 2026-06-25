@@ -1,109 +1,202 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
-import { GiftCard } from "@/components/registry/GiftCard";
-import { getRegistry, type RegistryItem, type RegistryCategory } from "@/lib/mockApi";
+import { Seal } from "@/components/heraldry/Seal";
+import { paymentsConfig } from "@/config/payments";
+import { openPaystack } from "@/lib/paystack";
 import site from "@/content/site.json";
-
-const TABS: ("All" | RegistryCategory | "Sealed")[] = [
-  "All",
-  "Kitchen",
-  "Laundry",
-  "Living Room",
-  "Bedroom",
-  "Sealed",
-];
 
 export const Route = createFileRoute("/registry")({
   head: () => ({
     meta: [
-      { title: `Blessings & Registry · ${site.bride.first} & ${site.groom.first}` },
-      { name: "description", content: `Contribute toward the first home of ${site.bride.first} & ${site.groom.first}. A blessing, not a transaction.` },
-      { property: "og:title", content: "Blessings & Registry" },
-      { property: "og:description", content: "A blessing for the first home. The gift persists beyond the day." },
+      { title: `Blessings · ${site.bride.first} & ${site.groom.first}` },
+      { name: "description", content: `A blessing toward the first home of ${site.bride.first} & ${site.groom.first}. A gift of the heart, not a transaction.` },
+      { property: "og:title", content: "Blessings" },
+      { property: "og:description", content: "A gift toward the couple's new home." },
     ],
   }),
   component: Registry,
 });
 
+const NGN = new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 });
+
+type DemoStep = "idle" | "processing" | "success";
+
 function Registry() {
-  const [items, setItems] = useState<RegistryItem[]>([]);
-  const [tab, setTab] = useState<(typeof TABS)[number]>("All");
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const [amount, setAmount] = useState<number>(paymentsConfig.presets[0]);
+  const [custom, setCustom] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [demoStep, setDemoStep] = useState<DemoStep>("idle");
 
-  const refresh = () => {
-    getRegistry().then((res) => { setItems(res); setLoading(false); });
-  };
+  const effectiveAmount = custom ? Math.max(0, Math.round(Number(custom) || 0)) : amount;
 
-  useEffect(() => { refresh(); }, []);
+  // Demo flow: simulate a checkout, then sail off to the thank-you page.
+  useEffect(() => {
+    if (demoStep === "processing") {
+      const t = setTimeout(() => setDemoStep("success"), 1900);
+      return () => clearTimeout(t);
+    }
+    if (demoStep === "success") {
+      const t = setTimeout(() => navigate({ to: "/thank-you" }), 1400);
+      return () => clearTimeout(t);
+    }
+  }, [demoStep, navigate]);
 
-  const filtered = items
-    .filter((it) => {
-      if (tab === "All") return true;
-      if (tab === "Sealed") return it.raised >= it.goal;
-      return it.category === tab;
-    })
-    .sort((a, b) => {
-      const aSealed = a.raised >= a.goal;
-      const bSealed = b.raised >= b.goal;
-      if (aSealed !== bSealed) return aSealed ? 1 : -1;
-      return 0;
-    });
+  async function bless(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+    if (!email.includes("@")) return setError("Please enter a valid email so a receipt can be sent.");
+    if (effectiveAmount < 100) return setError("Please choose or enter an amount.");
 
-  const totalRaised = items.reduce((s, it) => s + it.raised, 0);
-  const totalGoal = items.reduce((s, it) => s + it.goal, 0);
+    if (paymentsConfig.demoMode) {
+      setDemoStep("processing");
+      return;
+    }
+
+    try {
+      setBusy(true);
+      await openPaystack({
+        email,
+        name,
+        amountNaira: effectiveAmount,
+        onSuccess: () => navigate({ to: "/thank-you" }),
+        onClose: () => setBusy(false),
+      });
+    } catch {
+      setBusy(false);
+      setError("We could not open the payment window. Please try again in a moment.");
+    }
+  }
 
   return (
     <SectionWrapper ground="emerald">
       <div className="text-center">
-        <Eyebrow className="!text-gold-soft">Section X</Eyebrow>
-        <DisplayTitle inverse className="mt-4">Blessings &amp; Registry</DisplayTitle>
+        <Eyebrow className="!text-gold-soft">Blessings</Eyebrow>
+        <DisplayTitle inverse className="mt-4">A blessing for the couple</DisplayTitle>
         <GoldHairline withCipher wide />
-        <p className="font-display italic text-lg max-w-xl mx-auto text-ivory/80">
-          Your presence is the greatest gift. For those who have asked: small
-          contributions toward the first home we will build together.
+        <p className="font-display italic text-lg max-w-xl mx-auto text-ivory/75">
+          Your presence is the greatest gift of all. For those who wish to give,
+          a blessing toward our first home is received with full hearts. There is
+          no goal and no deadline, only love and gratitude.
         </p>
+      </div>
 
-        {!loading && (
-          <div className="mt-10 inline-flex items-baseline gap-4 px-8 py-5 border border-gold/40 bg-emerald-deep/40">
-            <span className="font-display text-3xl text-gold">
-              {Math.round((totalRaised / totalGoal) * 100)}%
-            </span>
-            <span className="eyebrow !text-gold-soft">fulfilled across all gifts</span>
+      <div className="max-w-xl mx-auto mt-12">
+        <div className="card-royal p-8 sm:p-10">
+          <div className="flex justify-center">
+            <Seal size={92} />
           </div>
-        )}
+
+          <form onSubmit={bless} className="mt-8 space-y-7">
+            <div>
+              <p className="eyebrow !text-left">Choose a blessing</p>
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                {paymentsConfig.presets.map((p) => {
+                  const active = !custom && amount === p;
+                  return (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => {
+                        setAmount(p);
+                        setCustom("");
+                      }}
+                      className={`py-2.5 text-sm font-display border transition-colors ${
+                        active
+                          ? "bg-emerald-ink text-ivory border-emerald-ink"
+                          : "bg-paper text-emerald-ink border-gold/40 hover:border-gold"
+                      }`}
+                    >
+                      {NGN.format(p)}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <span className="font-display text-emerald-ink/60">₦</span>
+                <input
+                  inputMode="numeric"
+                  value={custom}
+                  onChange={(e) => setCustom(e.target.value.replace(/[^\d]/g, ""))}
+                  placeholder="Or enter another amount"
+                  className="flex-1 bg-transparent border-b border-gold/40 py-2 font-display text-emerald-ink focus:outline-none focus:border-gold"
+                />
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              <label className="block">
+                <span className="eyebrow !text-left">Your name</span>
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="mt-2 w-full bg-transparent border-b border-gold/40 py-2 font-display text-emerald-ink focus:outline-none focus:border-gold"
+                />
+              </label>
+              <label className="block">
+                <span className="eyebrow !text-left">Email for receipt</span>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-2 w-full bg-transparent border-b border-gold/40 py-2 font-display text-emerald-ink focus:outline-none focus:border-gold"
+                />
+              </label>
+            </div>
+
+            {error && <p className="text-sm text-oxblood font-display">{error}</p>}
+
+            <button type="submit" disabled={busy} className="btn-royal w-full justify-center">
+              {busy ? "Opening Paystack…" : `Bless the couple · ${NGN.format(effectiveAmount)}`}
+            </button>
+
+            <p className="text-center font-ceremonial text-[0.58rem] tracking-[0.25em] text-charcoal/45">
+              {paymentsConfig.demoMode
+                ? "Demonstration · no payment is taken"
+                : "Secured by Paystack · Cards, bank transfer, and USSD"}
+            </p>
+          </form>
+        </div>
       </div>
 
-      <div className="mt-12 flex flex-wrap justify-center gap-2">
-        {TABS.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={`px-5 py-2 font-ceremonial text-[0.65rem] tracking-[0.3em] border transition-colors ${
-              tab === t
-                ? "border-gold bg-gold/20 text-gold-soft"
-                : "border-gold/30 text-ivory/70 hover:border-gold/60 hover:text-ivory"
-            }`}
-          >
-            {t === "Sealed" ? "❖ Sealed" : t}
-          </button>
-        ))}
-      </div>
-
-      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-        {loading
-          ? Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="aspect-[3/4] bg-emerald-deep/40 border border-gold/20 animate-pulse" />
-            ))
-          : filtered.map((it) => <GiftCard key={it.id} item={it} onChanged={refresh} />)}
-      </div>
-
-      {!loading && filtered.length === 0 && (
-        <p className="mt-12 text-center font-display italic text-ivory/70">
-          Every gift in this category has been blessed. ❖
-        </p>
+      {demoStep !== "idle" && (
+        <DemoCheckout step={demoStep} amount={effectiveAmount} />
       )}
     </SectionWrapper>
+  );
+}
+
+/** A simulated payment overlay so the giving flow can be experienced without a key. */
+function DemoCheckout({ step, amount }: { step: DemoStep; amount: number }) {
+  return (
+    <div className="fixed inset-0 z-50 grid place-items-center bg-emerald-ink/70 backdrop-blur-md p-4 animate-royal-fade">
+      <div className="w-full max-w-sm bg-ivory p-10 text-center border border-gold/40">
+        <p className="eyebrow">Demonstration</p>
+        {step === "processing" ? (
+          <>
+            <div className="mx-auto mt-6 h-12 w-12 rounded-full border-2 border-gold/30 border-t-gold animate-spin" />
+            <p className="mt-6 font-display text-xl text-emerald-ink">
+              Sending your blessing of {NGN.format(amount)}…
+            </p>
+            <p className="mt-2 font-display italic text-charcoal/60 text-sm">
+              This is a preview. No card is charged.
+            </p>
+          </>
+        ) : (
+          <>
+            <div className="mx-auto mt-6 grid h-14 w-14 place-items-center rounded-full bg-emerald-ink text-ivory text-2xl">
+              ✓
+            </div>
+            <p className="mt-6 font-display text-2xl text-emerald-ink">Blessing received</p>
+            <p className="mt-2 font-script text-3xl text-gold">Thank you</p>
+          </>
+        )}
+      </div>
+    </div>
   );
 }

@@ -201,25 +201,41 @@ function BridalParty() {
         <GoldHairline withCipher wide />
       </div>
 
-      <div className="mt-14">
-        <Marquee
-          items={party.members}
-          getKey={(p) => p.name}
-          renderItem={(p) => (
-            <div className="text-center w-40 px-4">
-              <div className="grid place-items-center h-20 w-20 mx-auto rounded-full bg-paper border border-gold/40">
-                <Cipher size={32} />
-              </div>
-              <p className="eyebrow mt-5 !text-[0.6rem]">{p.role}</p>
-              <p className="font-display text-lg mt-2 text-emerald-ink">{p.name}</p>
-            </div>
-          )}
-        />
+      <div className="mt-14 space-y-10">
+        <PartyTrain label={party.brideLabel} members={party.bride} />
+        <PartyTrain label={party.groomLabel} members={party.groom} />
       </div>
       <p className="mt-8 text-center font-ceremonial text-[0.6rem] tracking-[0.3em] text-charcoal/40">
         Drag or swipe to meet them all
       </p>
     </SectionWrapper>
+  );
+}
+
+function PartyTrain({
+  label,
+  members,
+}: {
+  label: string;
+  members: { role: string; name: string }[];
+}) {
+  return (
+    <div>
+      <p className="mb-5 text-center font-script text-2xl text-gold">{label}</p>
+      <Marquee
+        items={members}
+        getKey={(p) => p.name}
+        renderItem={(p) => (
+          <div className="text-center w-40 px-4">
+            <div className="grid place-items-center h-20 w-20 mx-auto rounded-full bg-paper border border-gold/40">
+              <Cipher size={32} />
+            </div>
+            <p className="eyebrow mt-5 !text-[0.6rem]">{p.role}</p>
+            <p className="font-display text-lg mt-2 text-emerald-ink">{p.name}</p>
+          </div>
+        )}
+      />
+    </div>
   );
 }
 

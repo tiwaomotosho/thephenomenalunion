@@ -1,13 +1,17 @@
 {
   "eyebrow": "The Court of Honour",
   "title": "Our bridal party",
-  "members": [
+  "brideLabel": "The Bride's Maids",
+  "groomLabel": "The Groom's Men",
+  "bride": [
     { "role": "Chief Bridesmaid", "name": "Fọlashadé Adékúnlé" },
     { "role": "Bridesmaid", "name": "Olámidé Bámidélé" },
     { "role": "Bridesmaid", "name": "Chiamaka Eze" },
     { "role": "Bridesmaid", "name": "Hàlimà Yusuf" },
     { "role": "Bridesmaid", "name": "Témitọ́pẹ́ Ogúnlèyè" },
-    { "role": "Bridesmaid", "name": "Zainab Bello" },
+    { "role": "Bridesmaid", "name": "Zainab Bello" }
+  ],
+  "groom": [
     { "role": "Best Man", "name": "Dr. Babátúndé Ọmọ́tọ̀shọ́" },
     { "role": "Groomsman", "name": "Fẹ́mi Adégbúyì" },
     { "role": "Groomsman", "name": "Chinedu Okafor" },

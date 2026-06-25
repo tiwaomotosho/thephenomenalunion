@@ -1,17 +1,5 @@
-import registryContent from "@/content/registry.json";
 import notesContent from "@/content/notes.json";
-import { img } from "@/content/images";
-import type { RegistryItem, RegistryCategory, Note } from "@/lib/mockApi";
-
-export const REGISTRY_SEED: RegistryItem[] = registryContent.items.map((it) => ({
-  id: it.id,
-  name: it.name,
-  description: it.description,
-  category: it.category as RegistryCategory,
-  goal: it.goal,
-  raised: it.raised,
-  image: img(it.image),
-}));
+import type { Note } from "@/lib/mockApi";
 
 const DAY_MS = 1000 * 60 * 60 * 24;
 
