@@ -1,0 +1,57 @@
+{
+  "homeSections": {
+    "story": true,
+    "couple": true,
+    "party": true
+  },
+  "pages": [
+    {
+      "id": "schedule",
+      "to": "/schedule",
+      "navLabel": "Order of the Day",
+      "cardTitle": "Order of the Day",
+      "blurb": "One indoor garden, from the first hymn to the last dance.",
+      "visible": false
+    },
+    {
+      "id": "venue",
+      "to": "/venue",
+      "navLabel": "Venue",
+      "cardTitle": "The Venue",
+      "blurb": "An indoor garden wedding at Redemption Camp, and how to find us.",
+      "visible": false
+    },
+    {
+      "id": "gallery",
+      "to": "/gallery",
+      "navLabel": "Gallery",
+      "cardTitle": "Gallery · #EniSaidYes",
+      "blurb": "Quiet evidence of the years that brought us here.",
+      "visible": true
+    },
+    {
+      "id": "registry",
+      "to": "/registry",
+      "navLabel": "Blessings",
+      "cardTitle": "Blessings & Registry",
+      "blurb": "Small contributions toward the first home we will share.",
+      "visible": true
+    },
+    {
+      "id": "notes",
+      "to": "/notes",
+      "navLabel": "Notes",
+      "cardTitle": "Notes Wall",
+      "blurb": "Leave a blessing for the table, and read those of others.",
+      "visible": true
+    },
+    {
+      "id": "faq",
+      "to": "/faq",
+      "navLabel": "FAQ",
+      "cardTitle": "Frequently Asked",
+      "blurb": "Dress code, children, parking, and other gentle matters.",
+      "visible": false
+    }
+  ]
+}

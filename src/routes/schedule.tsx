@@ -1,11 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { Cipher } from "@/components/heraldry/Cipher";
+import { isPageVisible, pageNumeral } from "@/content/pages";
 import site from "@/content/site.json";
 import schedule from "@/content/schedule.json";
 
 export const Route = createFileRoute("/schedule")({
+  beforeLoad: () => {
+    if (!isPageVisible("schedule")) throw redirect({ to: "/" });
+  },
   head: () => ({
     meta: [
       { title: `Order of the Day · ${site.bride.first} & ${site.groom.first}` },
@@ -23,7 +27,7 @@ function Schedule() {
   return (
     <SectionWrapper ground="paper">
       <div className="text-center">
-        <Eyebrow>Section VI</Eyebrow>
+        <Eyebrow>Section {pageNumeral("schedule")}</Eyebrow>
         <DisplayTitle className="mt-4">Order of the Day</DisplayTitle>
         <GoldHairline withCipher wide />
         <p className="font-display italic text-lg max-w-xl mx-auto text-charcoal/80">

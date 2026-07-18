@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Crest } from "@/components/heraldry/Crest";
 import site from "@/content/site.json";
+import { visiblePages } from "@/content/pages";
 
 export function Footer() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -27,12 +28,9 @@ export function Footer() {
 
         <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-[0.7rem] font-ceremonial tracking-[0.28em] text-ivory/70">
           <Link to="/" onClick={homeScroll} className="hover:text-gold">Home</Link>
-          <Link to="/schedule" className="hover:text-gold">Order of the Day</Link>
-          <Link to="/venue" className="hover:text-gold">Venue</Link>
-          <Link to="/gallery" className="hover:text-gold">Gallery</Link>
-          <Link to="/registry" className="hover:text-gold">Blessings</Link>
-          <Link to="/notes" className="hover:text-gold">Notes</Link>
-          <Link to="/faq" className="hover:text-gold">FAQ</Link>
+          {visiblePages.map((p) => (
+            <Link key={p.to} to={p.to} className="hover:text-gold">{p.navLabel}</Link>
+          ))}
         </nav>
 
         <p className="mt-10 text-xs text-ivory/40 font-display italic">

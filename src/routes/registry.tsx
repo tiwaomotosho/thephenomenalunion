@@ -1,13 +1,17 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { Seal } from "@/components/heraldry/Seal";
 import { paymentsConfig } from "@/config/payments";
 import { sendReceipt } from "@/lib/receipt";
+import { isPageVisible } from "@/content/pages";
 import site from "@/content/site.json";
 
 export const Route = createFileRoute("/registry")({
+  beforeLoad: () => {
+    if (!isPageVisible("registry")) throw redirect({ to: "/" });
+  },
   head: () => ({
     meta: [
       { title: `Blessings · ${site.bride.first} & ${site.groom.first}` },

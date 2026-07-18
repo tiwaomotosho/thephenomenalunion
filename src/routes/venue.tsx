@@ -1,11 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { MapPin, Phone, Clock } from "lucide-react";
+import { isPageVisible } from "@/content/pages";
 import site from "@/content/site.json";
 import venue from "@/content/venue.json";
 
 export const Route = createFileRoute("/venue")({
+  beforeLoad: () => {
+    if (!isPageVisible("venue")) throw redirect({ to: "/" });
+  },
   head: () => ({
     meta: [
       { title: `Venue · ${site.bride.first} & ${site.groom.first}` },

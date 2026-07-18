@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import { Cipher } from "@/components/heraldry/Cipher";
 import { Menu, X } from "lucide-react";
 import site from "@/content/site.json";
+import { visiblePages, isPageVisible } from "@/content/pages";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
+// Home is always present; the rest of the nav follows what is switched on in
+// pages.json, in site order.
 const NAV = [
-  { to: "/", label: "Home" },
-  { to: "/schedule", label: "Order of the Day" },
-  { to: "/venue", label: "Venue" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/registry", label: "Blessings" },
-  { to: "/notes", label: "Notes" },
-  { to: "/faq", label: "FAQ" },
-] as const;
+  { to: "/" as const, label: "Home" },
+  ...visiblePages.map((p) => ({ to: p.to, label: p.navLabel })),
+];
+
+const showBlessCta = isPageVisible("registry");
 
 /** Scroll to the very top — used when a link points at the page already shown. */
 function scrollToTop() {
@@ -87,9 +87,11 @@ export function Header() {
             );
           })}
           <ThemeToggle />
-          <Link to="/registry" className="btn-royal !py-2 !px-5 !text-[0.62rem]">
-            Bless Us
-          </Link>
+          {showBlessCta && (
+            <Link to="/registry" className="btn-royal !py-2 !px-5 !text-[0.62rem]">
+              Bless Us
+            </Link>
+          )}
         </nav>
 
         <button
@@ -116,9 +118,11 @@ export function Header() {
               </Link>
             ))}
             <div className="mt-2 flex items-center gap-3">
-              <Link to="/registry" className="btn-royal self-start">
-                Bless Us
-              </Link>
+              {showBlessCta && (
+                <Link to="/registry" className="btn-royal self-start">
+                  Bless Us
+                </Link>
+              )}
               <ThemeToggle className="ml-1" />
             </div>
           </nav>

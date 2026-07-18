@@ -1,16 +1,20 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { GalleryEditorial } from "@/components/gallery/GalleryEditorial";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { img } from "@/content/images";
+import { isPageVisible } from "@/content/pages";
 import site from "@/content/site.json";
 import gallery from "@/content/gallery.json";
 
 const IMAGES = gallery.images.map((g) => ({ src: img(g.image), caption: g.caption }));
 
 export const Route = createFileRoute("/gallery")({
+  beforeLoad: () => {
+    if (!isPageVisible("gallery")) throw redirect({ to: "/" });
+  },
   head: () => ({
     meta: [
       { title: `Gallery ${site.hashtag} · ${site.bride.first} & ${site.groom.first}` },

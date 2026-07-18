@@ -1,10 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { NotesWall } from "@/components/notes/NotesWall";
+import { isPageVisible, pageNumeral } from "@/content/pages";
 import site from "@/content/site.json";
 
 export const Route = createFileRoute("/notes")({
+  beforeLoad: () => {
+    if (!isPageVisible("notes")) throw redirect({ to: "/" });
+  },
   head: () => ({
     meta: [
       { title: `Notes Wall · ${site.bride.first} & ${site.groom.first}` },
@@ -20,7 +24,7 @@ function NotesPage() {
   return (
     <SectionWrapper ground="ivory">
       <div className="text-center">
-        <Eyebrow>Section XI</Eyebrow>
+        <Eyebrow>Section {pageNumeral("notes")}</Eyebrow>
         <DisplayTitle className="mt-4">The Notes Wall</DisplayTitle>
         <GoldHairline withCipher wide />
         <p className="font-display italic text-lg max-w-xl mx-auto text-charcoal/80">

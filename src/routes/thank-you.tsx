@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SectionWrapper, Eyebrow } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { Seal } from "@/components/heraldry/Seal";
+import { isPageVisible } from "@/content/pages";
 import site from "@/content/site.json";
 
 export const Route = createFileRoute("/thank-you")({
@@ -37,7 +38,9 @@ function ThankYou() {
 
         <div className="mt-12 flex flex-wrap justify-center gap-4">
           <Link to="/" className="btn-royal">Return home</Link>
-          <Link to="/notes" className="btn-royal-ghost">Read the notes wall</Link>
+          {isPageVisible("notes") && (
+            <Link to="/notes" className="btn-royal-ghost">Read the notes wall</Link>
+          )}
         </div>
       </div>
     </SectionWrapper>

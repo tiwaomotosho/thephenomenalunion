@@ -1,12 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { Plus, Minus } from "lucide-react";
+import { isPageVisible, pageNumeral } from "@/content/pages";
 import site from "@/content/site.json";
 import faq from "@/content/faq.json";
 
 export const Route = createFileRoute("/faq")({
+  beforeLoad: () => {
+    if (!isPageVisible("faq")) throw redirect({ to: "/" });
+  },
   head: () => ({
     meta: [
       { title: `FAQ · ${site.bride.first} & ${site.groom.first}` },
@@ -25,7 +29,7 @@ function Faq() {
   return (
     <SectionWrapper ground="ivory">
       <div className="text-center">
-        <Eyebrow>Section XIII</Eyebrow>
+        <Eyebrow>Section {pageNumeral("faq")}</Eyebrow>
         <DisplayTitle className="mt-4">Frequently Asked</DisplayTitle>
         <GoldHairline withCipher wide />
       </div>
