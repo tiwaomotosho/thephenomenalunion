@@ -4,6 +4,7 @@ import { Crest } from "@/components/heraldry/Crest";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { Countdown } from "@/components/Countdown";
+import { useBrightenInView } from "@/hooks/use-brighten-in-view";
 import { img } from "@/content/images";
 import site from "@/content/site.json";
 import story from "@/content/story.json";
@@ -171,14 +172,16 @@ function CoupleCard({
 }: {
   person: { eyebrow: string; name: string; house: string; image: string; body: string };
 }) {
+  const imgRef = useBrightenInView<HTMLImageElement>();
   return (
     <article className="text-center group">
       <div className="relative aspect-[3/4] overflow-hidden border border-gold/40 bg-ivory">
         <img
+          ref={imgRef}
           src={img(person.image)}
           alt={person.name}
           loading="lazy"
-          className="h-full w-full object-cover grayscale-[60%] group-hover:grayscale-0 transition-all duration-700"
+          className="portrait-photo h-full w-full object-cover"
         />
       </div>
       <p className="eyebrow mt-6">{person.eyebrow}</p>
@@ -247,14 +250,16 @@ function BridalParty() {
 
 /** A single bridal-party portrait — smaller than the couple's, secondary focus. */
 function PartyPortrait({ member }: { member: PartyMember }) {
+  const imgRef = useBrightenInView<HTMLImageElement>();
   return (
     <figure className="group text-center">
       <div className="relative mx-auto aspect-[3/4] max-w-[16rem] overflow-hidden border border-gold/40 bg-ivory">
         <img
+          ref={imgRef}
           src={img(member.image)}
           alt={member.name}
           loading="lazy"
-          className="h-full w-full object-cover grayscale-[55%] transition-all duration-700 group-hover:grayscale-0"
+          className="portrait-photo h-full w-full object-cover"
         />
       </div>
       <figcaption>
@@ -266,8 +271,8 @@ function PartyPortrait({ member }: { member: PartyMember }) {
 }
 
 const PREVIEWS = [
-  { to: "/schedule", eyebrow: "VI", title: "Order of the Day", body: "One garden, from the first hymn to the last dance." },
-  { to: "/venue", eyebrow: "VII", title: "The Venue", body: "A garden wedding at Redemption Camp, and how to find us." },
+  { to: "/schedule", eyebrow: "VI", title: "Order of the Day", body: "One indoor garden, from the first hymn to the last dance." },
+  { to: "/venue", eyebrow: "VII", title: "The Venue", body: "An indoor garden wedding at Redemption Camp, and how to find us." },
   { to: "/gallery", eyebrow: "IX", title: "Gallery · #EniSaidYes", body: "Quiet evidence of the years that brought us here." },
   { to: "/registry", eyebrow: "X", title: "Blessings & Registry", body: "Small contributions toward the first home we will share." },
   { to: "/notes", eyebrow: "XI", title: "Notes Wall", body: "Leave a blessing for the table, and read those of others." },

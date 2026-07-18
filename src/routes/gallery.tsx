@@ -75,14 +75,14 @@ function Gallery() {
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); step(-1); }}
-            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 text-ivory/70 hover:text-gold p-2"
+            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 text-ivory/80 hover:text-ivory p-2"
             aria-label="Previous"
           >
             <ChevronLeft size={36} />
           </button>
           <button
             onClick={(e) => { e.stopPropagation(); step(1); }}
-            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 text-ivory/70 hover:text-gold p-2"
+            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 text-ivory/80 hover:text-ivory p-2"
             aria-label="Next"
           >
             <ChevronRight size={36} />
@@ -93,9 +93,9 @@ function Gallery() {
               alt={IMAGES[open].caption}
               className="max-h-[80vh] w-auto mx-auto object-contain border border-gold/40"
             />
-            <figcaption className="mt-4 text-center font-script text-2xl text-gold">
+            <figcaption className="mt-4 text-center font-script text-2xl text-ivory">
               {IMAGES[open].caption}
-              <span className="block mt-1 font-ceremonial text-[0.6rem] tracking-[0.3em] text-ivory/50">
+              <span className="block mt-1 font-ceremonial text-[0.6rem] tracking-[0.3em] text-ivory/60">
                 {open + 1} / {IMAGES.length}
               </span>
             </figcaption>

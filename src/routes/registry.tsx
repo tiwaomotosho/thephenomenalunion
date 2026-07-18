@@ -53,12 +53,12 @@ function Registry() {
   }
 
   return (
-    <SectionWrapper ground="emerald">
+    <SectionWrapper ground="ivory">
       <div className="text-center">
-        <Eyebrow className="!text-gold-soft">Blessings</Eyebrow>
-        <DisplayTitle inverse className="mt-4">A blessing for the couple</DisplayTitle>
+        <Eyebrow>Blessings</Eyebrow>
+        <DisplayTitle className="mt-4">A blessing for the couple</DisplayTitle>
         <GoldHairline withCipher wide />
-        <p className="font-display italic text-lg max-w-xl mx-auto text-ivory/75">
+        <p className="font-display italic text-lg max-w-xl mx-auto text-charcoal/80">
           Your presence is the greatest gift of all. For those who wish to give,
           a blessing toward our first home is received with full hearts. There is
           no goal and no deadline, only love and gratitude.

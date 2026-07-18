@@ -2,8 +2,8 @@
   "eyebrow": "The Venue",
   "title": "The Garden",
   "name": "Redemption Camp",
-  "subname": "A Garden Wedding",
-  "blurb": "We will marry beneath the trees at Redemption Camp, where the lawns are wide and the morning light is kind. Everything happens in one garden, from the first hymn to the last dance.",
+  "subname": "An Indoor Garden Wedding",
+  "blurb": "We will marry at Redemption Camp, in a hall dressed as a garden — lush greenery, blooms, and soft light, kept cool and dry whatever the weather. Everything happens under one roof, from the first hymn to the last dance.",
   "address": "Redemption Camp, Mowe, Ogun State",
   "phone": "+234 808 555 0142",
   "openLine": "The day begins at 10 in the morning",
@@ -11,10 +11,10 @@
   "mapEmbed": "https://www.google.com/maps?q=Redemption%20Camp%2C%20Mowe%2C%20Ogun%20State&output=embed",
   "dressCode": {
     "title": "Garden formal",
-    "body": "Long dresses, agbada, gele, and a well cut suit. Wear the house colours where you can: ivory, emerald, and gold. Kind shoes for soft grass are wise."
+    "body": "Long dresses, agbada, gele, and a well cut suit. Wear the house colours where you can: ivory, emerald, and gold. Comfortable shoes for an evening of dancing are wise."
   },
   "children": {
     "title": "An adults only celebration",
-    "body": "To allow every guest to relax in the garden, we have chosen an adults only day, with the warm exception of those named on your invitation."
+    "body": "To allow every guest to relax in the hall, we have chosen an adults only day, with the warm exception of those named on your invitation."
   }
 }

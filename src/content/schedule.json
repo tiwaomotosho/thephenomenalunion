@@ -1,13 +1,13 @@
 {
   "items": [
-    { "time": "10:00", "title": "Guests are seated", "place": "The Garden Lawn", "note": "Strings play softly as the garden fills" },
-    { "time": "10:30", "title": "The procession", "place": "The Garden Aisle", "note": "The bridal party walks in beneath the trees" },
+    { "time": "10:00", "title": "Guests are seated", "place": "The Garden Hall", "note": "Strings play softly as the hall fills" },
+    { "time": "10:30", "title": "The procession", "place": "The Garden Aisle", "note": "The bridal party walks in beneath the blooms" },
     { "time": "11:00", "title": "The marriage ceremony", "place": "The Garden Altar", "note": "Hymns, the vows, and the exchange of rings" },
     { "time": "12:00", "title": "Pronounced husband and wife", "place": "The Garden Altar", "note": "The blessing of the marriage and the first kiss" },
-    { "time": "12:30", "title": "Photographs on the lawn", "place": "The Garden", "note": "Family portraits while small chops are served" },
-    { "time": "13:00", "title": "Lunch in the garden", "place": "The Garden Marquee", "note": "A seated meal in the open air" },
-    { "time": "14:30", "title": "Toasts and the cutting of the cake", "place": "The Garden Marquee", "note": "Warm words from family and friends" },
+    { "time": "12:30", "title": "Photographs among the florals", "place": "The Garden Hall", "note": "Family portraits while small chops are served" },
+    { "time": "13:00", "title": "Lunch in the garden", "place": "The Garden Hall", "note": "A seated meal beneath the greenery" },
+    { "time": "14:30", "title": "Toasts and the cutting of the cake", "place": "The Garden Hall", "note": "Warm words from family and friends" },
     { "time": "15:30", "title": "The first dance", "place": "The Garden Floor", "note": "Then the floor opens to everyone" },
-    { "time": "17:30", "title": "The sendoff", "place": "The Garden Gate", "note": "We say our thanks as the sun goes down" }
+    { "time": "17:30", "title": "The sendoff", "place": "The Garden Doors", "note": "We say our thanks as the evening settles" }
   ]
 }

@@ -79,14 +79,18 @@
  */
 :root {
   /* Royal — Emerald & Gold (DEFAULT, the original). Deep emerald grounds with a
-     champagne-gold accent and the gilt crest. */
+     champagne-gold accent and the gilt crest.
+     Note: --gold-champagne is deepened to an antique gold so decorative gold
+     text (script accents, times) clears WCAG AA-large on the ivory/paper
+     grounds. The brighter --gold-soft is used for accents on emerald grounds,
+     and the --gilt gradient keeps frames/hairlines luminous. */
   --ivory: #fbf7ee;
   --paper: #f4eedc;
   --emerald-deep: #0b3b2e;
   --emerald-ink: #06241b;
-  --gold-champagne: #c9a961;
+  --gold-champagne: #ab8330;
   --gold-soft: #e6c98a;
-  --gold-deep: #7a5f28;
+  --gold-deep: #6f561f;
   --oxblood: #6b1f2a;
   --charcoal: #2a2a2a;
   --ink: #1a1a1a;
@@ -105,13 +109,13 @@
   --secondary-foreground: #06241b;
   --muted: #efe7d3;
   --muted-foreground: #5a5347;
-  --accent: #c9a961;
+  --accent: #ab8330;
   --accent-foreground: #06241b;
   --destructive: #6b1f2a;
   --destructive-foreground: #fbf7ee;
-  --border: rgba(201, 169, 97, 0.35);
-  --input: rgba(201, 169, 97, 0.45);
-  --ring: #c9a961;
+  --border: rgba(171, 131, 48, 0.38);
+  --input: rgba(171, 131, 48, 0.48);
+  --ring: #ab8330;
 }
 
 html[data-theme="garden"] {
@@ -468,6 +472,20 @@ html.lenis body { height: auto; }
   font-size: 0.6rem;
   color: var(--gold-deep);
 }
+
+/* ───────────── Portrait brighten (couple & bridal party) ─────────────
+   Portraits sit lightly desaturated, then colour in — a soft "brighten".
+   On pointer devices this happens on hover of the enclosing .group. On touch
+   devices (no hover) it happens once the portrait scrolls into view; a small
+   hook adds .is-inview. */
+.portrait-photo {
+  filter: grayscale(55%);
+  transition: filter 700ms ease, scale 700ms ease;
+}
+@media (hover: hover) {
+  .group:hover .portrait-photo { filter: grayscale(0); }
+}
+.portrait-photo.is-inview { filter: grayscale(0); }
 
 /* The gallery wall: themed plaster, a hair deeper than the ivory mats so each
    framed picture lifts off it. Follows the active colour scheme. */

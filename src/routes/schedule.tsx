@@ -9,7 +9,7 @@ export const Route = createFileRoute("/schedule")({
   head: () => ({
     meta: [
       { title: `Order of the Day · ${site.bride.first} & ${site.groom.first}` },
-      { name: "description", content: `The order of the day for ${site.date.display}. One garden, from the first hymn to the last dance.` },
+      { name: "description", content: `The order of the day for ${site.date.display}. One indoor garden, from the first hymn to the last dance.` },
       { property: "og:title", content: `Order of the Day · ${site.date.display}` },
       { property: "og:description", content: `The order of the day for the wedding of ${site.bride.first} & ${site.groom.first}.` },
     ],

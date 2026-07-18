@@ -9,9 +9,9 @@ export const Route = createFileRoute("/venue")({
   head: () => ({
     meta: [
       { title: `Venue · ${site.bride.first} & ${site.groom.first}` },
-      { name: "description", content: "A garden wedding at Redemption Camp. Where to be and how to arrive on the day." },
+      { name: "description", content: "An indoor garden wedding at Redemption Camp. Where to be and how to arrive on the day." },
       { property: "og:title", content: `Venue · ${site.date.display}` },
-      { property: "og:description", content: "A garden wedding at Redemption Camp." },
+      { property: "og:description", content: "An indoor garden wedding at Redemption Camp." },
     ],
   }),
   component: Venue,
