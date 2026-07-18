@@ -1,20 +1,29 @@
 /**
- * Paystack settings for receiving blessings (gifts) toward the couple's home.
- * There is no goal and no expiry; this simply opens a secure payment.
+ * Blessings (money gifts) settings.
  *
- * Set your public key in a .env file as VITE_PAYSTACK_PUBLIC_KEY=pk_live_xxx
- * (or pk_test_xxx while testing). See docs/integrations.md for the full setup.
+ * Guests give by bank transfer: they pick an amount and leave their name and
+ * email, then the page shows the couple's account details boldly and asks them
+ * to confirm once they have sent the transfer. On confirm, a payment
+ * confirmation (name, email, amount) is POSTed to an optional Google Apps
+ * Script web app that emails them a receipt, and they land on the thank-you
+ * page.
  *
- * While no key is set, the page runs in DEMO MODE: the give button opens a
- * simulated checkout so you can feel the flow without taking any real payment.
+ * EDIT THE ACCOUNT DETAILS in src/content/payments.json — no code needed:
+ *   bankName, accountName, accountNumber, transactionDescription, presets.
+ *
+ * The receipt endpoint is a secret-free Apps Script URL set in a .env file as
+ * VITE_RECEIPT_ENDPOINT=... (see docs/integrations.md). While it is empty the
+ * confirmation runs in a harmless placeholder mode: the flow completes and the
+ * guest reaches the thank-you page, but no receipt email is actually sent.
  */
-const key = (import.meta.env.VITE_PAYSTACK_PUBLIC_KEY ?? "") as string;
+import data from "@/content/payments.json";
+
+const receiptEndpoint = (import.meta.env.VITE_RECEIPT_ENDPOINT ?? "") as string;
 
 export const paymentsConfig = {
-  paystackPublicKey: key,
-  /** True when no real key is set — the give button simulates a payment. */
-  demoMode: !key,
-  currency: "NGN",
-  /** Suggested amounts in Naira; guests can also enter their own. */
-  presets: [20000, 50000, 100000, 250000, 500000],
+  ...data,
+  /** Google Apps Script URL that emails receipts; empty → placeholder mode. */
+  receiptEndpoint,
+  /** True once a real endpoint is set. */
+  receiptEnabled: Boolean(receiptEndpoint),
 };

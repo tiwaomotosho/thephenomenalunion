@@ -2,7 +2,7 @@
 
 How to take the two live features from demo to production:
 
-1. **Paystack** — receiving blessings (money gifts).
+1. **Blessings** — receiving money gifts by bank transfer, with an emailed receipt.
 2. **Notes wall** — a guestbook backed by Google Sheets + Apps Script.
 
 Everything in the site reads from a `.env` file. Copy `.env.example` to `.env`,
@@ -12,129 +12,104 @@ exposed to the browser, so never put a **secret** key in one.
 
 ---
 
-## 1. Paystack
+## 1. Blessings (bank transfer + receipt)
 
-Right now the Blessings page (`/registry`) is in **demo mode**: clicking "Bless
-the couple" shows a simulated success and no money moves. It switches to real
-payments automatically the moment you set `VITE_PAYSTACK_PUBLIC_KEY`.
+The Blessings page (`/registry`) collects gifts by **bank transfer** — no
+payment processor, no keys, no fees. The flow:
 
-### 1.1 Create and activate your account
+1. A guest picks (or types) an amount and enters their name and email.
+2. The page shows **your account details boldly** and a suggested transfer
+   reference.
+3. They make the transfer in their own banking app, then press
+   **"I have sent it · Confirm payment"**.
+4. That fires a confirmation to your (optional) Apps Script, which emails them a
+   receipt and logs the gift, and the guest lands on the thank-you page.
 
-1. Go to <https://paystack.com> and sign up. Choose **Nigeria** and **NGN**.
-2. In the dashboard, open **Settings → Business** (also called *Compliance* or
-   *Get Started / Activate Business*) and complete:
-   - **Business profile**: name, category, description, website
-     (your deployed URL), support email and phone.
-   - **Settlement account**: the Nigerian bank account where payouts land.
-     Paystack does a small test transfer to confirm it.
-   - **Identity / KYC verification**:
-     - *Starter business* (sole proprietor / individual): your **BVN**, a
-       government ID (NIN, driver's licence, or passport), and a selfie.
-     - *Registered business*: add your **CAC/RC number** and business
-       documents in addition to a director's ID.
-3. Submit for review. Test mode works immediately; **live keys only work after
-   your business is approved** (usually a day or two).
+### 1.1 Set your account details (no code)
 
-### 1.2 Get your API keys
+Edit `src/content/payments.json` — this is the only file most people need to
+touch:
 
-Dashboard → **Settings → API Keys & Webhooks**. You get four keys:
-
-| Key | Prefix | Where it goes |
-|---|---|---|
-| Test Public | `pk_test_` | frontend `.env` while testing |
-| Test Secret | `sk_test_` | **server only** — never in the frontend |
-| Live Public | `pk_live_` | frontend `.env` in production |
-| Live Secret | `sk_live_` | **server only** — never in the frontend |
-
-> **Golden rule:** the **public** key can sit in the browser. The **secret** key
-> verifies transactions and must live only on a server (a serverless function or
-> Apps Script). If a secret key ever leaks, click **Roll key** in the dashboard.
-
-### 1.3 Turn on real payments (frontend — already built)
-
-The inline checkout is already implemented in `src/lib/paystack.ts` and used by
-`src/routes/registry.tsx`. To go live:
-
-```bash
-# .env
-VITE_PAYSTACK_PUBLIC_KEY=pk_test_xxxxxxxx   # then pk_live_xxxx for production
-```
-
-Restart the dev server. The "Demonstration" note disappears, and the button now
-opens the real Paystack popup (cards, bank transfer, USSD). On success the guest
-is sent to the thank-you page. Amounts are taken in **kobo** (we multiply Naira
-by 100 for you). Preset buttons and the custom field live in
-`src/config/payments.ts`.
-
-### 1.4 Verify every payment (server — strongly recommended)
-
-The browser `callback` tells you a payment *looks* successful, but a guest could
-fake it. Before you treat a blessing as real (e.g. send a thank-you, log it to a
-sheet), **verify it server-side** with your secret key:
-
-```
-GET https://api.paystack.co/transaction/verify/{reference}
-Authorization: Bearer sk_live_xxxx
-```
-
-Check that `data.status === "success"` **and** `data.amount` equals what you
-expected. Two easy places to do this without a traditional backend:
-
-**Option A — Vercel serverless function** (this project deploys on Vercel).
-Create `api/verify.ts` (set `PAYSTACK_SECRET_KEY` in Vercel → Project →
-Settings → Environment Variables — note: **no** `VITE_` prefix, so it stays
-server-side):
-
-```ts
-export default async function handler(req: Request) {
-  const { reference } = await req.json();
-  const res = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
-    headers: { Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}` },
-  });
-  const json = await res.json();
-  const ok = json.data?.status === "success";
-  return new Response(JSON.stringify({ ok, amount: json.data?.amount }), {
-    headers: { "content-type": "application/json" },
-  });
+```json
+{
+  "currency": "NGN",
+  "presets": [20000, 50000, 100000, 250000, 500000],
+  "bankName": "Guaranty Trust Bank (GTBank)",
+  "accountName": "Eniolaoluwa & Tiwalade Omotosho",
+  "accountNumber": "0123456789",
+  "transactionDescription": "Wedding blessing for E&T"
 }
 ```
 
-Then in `registry.tsx`'s `onSuccess`, `POST` the `reference` to `/api/verify`
-before navigating to the thank-you page.
+- `presets` are the suggested-amount buttons; guests can still enter any amount.
+- `transactionDescription` is the reference shown to guests (the page appends
+  the guest's name so you can reconcile transfers).
 
-**Option B — Google Apps Script** (if you would rather keep everything in
-Sheets): use the same script as the Notes wall (section 2) with an extra
-`doPost` branch that takes the reference, calls the verify URL with
-`UrlFetchApp`, and appends the gift to a "Gifts" sheet. Keep the secret key in
-**Script Properties**, never in client code.
+That is enough to go live — the confirm button works immediately. Without a
+receipt endpoint (below) it runs in **placeholder mode**: the guest still
+reaches the thank-you page, but no receipt email is sent.
 
-### 1.5 Webhooks (the reliable way to record gifts)
+### 1.2 Email receipts automatically (optional — Google Apps Script)
 
-A guest might close the tab before the callback fires. Webhooks fix this:
-Paystack calls *your* server for every event.
+To email a receipt and keep a record of every confirmed gift, point the site at
+a Google Apps Script web app. The frontend is already wired: set
+`VITE_RECEIPT_ENDPOINT` and confirmations POST to it; leave it empty and the
+flow stays in placeholder mode.
 
-1. Dashboard → **Settings → API Keys & Webhooks → Webhook URL**: paste your
-   endpoint (the Vercel function or the Apps Script `/exec` URL).
-2. On each call, **verify the signature** so you know it is really Paystack.
-   It is an HMAC SHA-512 of the raw request body using your **secret key**,
-   sent in the `x-paystack-signature` header:
+Create a Google Sheet (e.g. **"E&T Gifts"**) with row-1 headers
+`name · email · amount · currency · createdAt`, then **Extensions → Apps
+Script** and paste:
 
-   ```ts
-   import crypto from "node:crypto";
-   const hash = crypto.createHmac("sha512", process.env.PAYSTACK_SECRET_KEY!)
-     .update(rawBody).digest("hex");
-   if (hash !== req.headers["x-paystack-signature"]) return; // reject
-   ```
-3. When the event is `charge.success`, record the gift (donor name from
-   `data.metadata`, amount, reference) to your Gifts sheet.
+```js
+const SHEET = "Sheet1"; // rename if your tab is named differently
 
-### 1.6 Go-live checklist
+function doPost(e) {
+  const body = JSON.parse(e.postData.contents || "{}");
+  if (body.action === "receipt") {
+    const sh = SpreadsheetApp.getActive().getSheetByName(SHEET);
+    sh.appendRow([body.name, body.email, body.amount, body.currency, body.createdAt]);
 
-- [ ] Business approved; live keys visible in the dashboard.
-- [ ] `VITE_PAYSTACK_PUBLIC_KEY` set to the **live** public key in production.
-- [ ] Secret key set only on the server (Vercel env var or Apps Script property).
-- [ ] Server-side verify and/or webhook wired and signature-checked.
-- [ ] One real low-value transaction tested end to end, then refunded.
+    const naira = "₦" + Number(body.amount).toLocaleString("en-NG");
+    MailApp.sendEmail({
+      to: body.email,
+      subject: "Thank you for your blessing 💛",
+      htmlBody:
+        `Dear ${body.name},<br><br>` +
+        `We have received your kind blessing of <b>${naira}</b> and are ` +
+        `deeply grateful.<br><br>With love,<br>Eni &amp; Tiwa`,
+    });
+    return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+  return ContentService.createTextOutput(JSON.stringify({ ok: false }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+Deploy it: **Deploy → New deployment → Web app**, **Execute as: Me**,
+**Who has access: Anyone**, authorise, and copy the `/exec` URL:
+
+```bash
+# .env
+VITE_RECEIPT_ENDPOINT=https://script.google.com/macros/s/AKfycb..../exec
+```
+
+Restart the dev server. Confirmations now append a row to the sheet and email
+the guest a receipt.
+
+> **Note — this is a self-reported confirmation, not verified settlement.** The
+> guest presses "I have sent it" before the money has necessarily cleared. Treat
+> the Gifts sheet as a list of *pledges*, and reconcile it against your bank
+> statement before you thank anyone as a confirmed donor. Because there is no
+> payment processor, there is no secret key, webhook, or signature to manage.
+
+### 1.3 Go-live checklist
+
+- [ ] Real account details in `src/content/payments.json`.
+- [ ] `VITE_RECEIPT_ENDPOINT` set (or accept placeholder mode with no receipts).
+- [ ] Apps Script deployed as **New version** after any edit, so `/exec` is current.
+- [ ] One test transfer + confirm, checked against the Gifts sheet and inbox.
+- [ ] Reconcile the Gifts sheet against your bank statement before thanking donors.
 
 ---
 

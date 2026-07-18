@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 
 /**
  * Cycles between the three colour schemes and remembers the choice.
- *   Garden — Green & Pink (green majority, the default)
+ *   Royal  — Emerald & Gold (the original, the default)
  *   Blush  — Pink & Green (pink majority)
- *   Royal  — Emerald & Gold (the original)
+ *   Garden — Green & Pink (green majority)
  * An inline script in the document head applies the saved choice before paint,
  * so there is no flash on load. The two dots preview the current scheme.
  */
 const KEY = "tpu.theme";
 type Theme = "garden" | "blush" | "royal";
 
-const ORDER: Theme[] = ["blush", "garden", "royal"];
+const ORDER: Theme[] = ["royal", "blush", "garden"];
 const META: Record<Theme, { label: string; dots: [string, string] }> = {
   blush: { label: "Blush", dots: ["#a84a6a", "#7aa06a"] },
   garden: { label: "Garden", dots: ["#3f5f48", "#f4c2c2"] },
@@ -19,11 +19,11 @@ const META: Record<Theme, { label: string; dots: [string, string] }> = {
 };
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
-  const [theme, setTheme] = useState<Theme>("blush");
+  const [theme, setTheme] = useState<Theme>("royal");
 
   useEffect(() => {
     const attr = document.documentElement.getAttribute("data-theme");
-    setTheme(attr === "royal" || attr === "garden" ? attr : "blush");
+    setTheme(attr === "blush" || attr === "garden" ? attr : "royal");
   }, []);
 
   const cycle = () => {

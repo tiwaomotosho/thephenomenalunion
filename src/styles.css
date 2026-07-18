@@ -66,7 +66,7 @@
 }
 
 /*
- * Two colour schemes share one set of semantic tokens, so contrast roles are
+ * Three colour schemes share one set of semantic tokens, so contrast roles are
  * preserved whichever is active:
  *   - emerald-ink / emerald-deep  → the dark ground + dark headings (high
  *     contrast on light, white/ivory text reads on them)
@@ -74,44 +74,44 @@
  *   - gold-champagne → larger decorative accent (passes AA-large on light)
  *   - gold-soft   → bright accent on dark grounds
  *   - ivory / paper → light grounds
- * Default is the Blush (Pink & Green, pink majority) scheme; [data-theme="garden"]
- * is the green-majority variant and [data-theme="royal"] the emerald-and-gold one.
+ * Default is the Royal (Emerald & Gold, the original) scheme; [data-theme="blush"]
+ * is the pink-majority variant and [data-theme="garden"] the green-majority one.
  */
 :root {
-  /* Blush — Pink & Green, pink majority (DEFAULT). The dominant dark ground is
-     a deep plum-rose, green is the accent, and the gold crest harmonises. */
-  --ivory: #fbf3f3; /* blush white */
-  --paper: #f6e6e7; /* soft pink cream */
-  --emerald-deep: #743a55; /* plum-rose, medium */
-  --emerald-ink: #5e2740; /* deep plum-rose, dominant dark ground */
-  --gold-champagne: #5f8a52; /* sage green — decorative; AA-large on light */
-  --gold-soft: #bcd9ac; /* light sage — bright on plum grounds */
-  --gold-deep: #3a5a40; /* deep green — small text on light (AA ~7:1) */
-  --oxblood: #7d3346;
-  --charcoal: #3a2b30;
+  /* Royal — Emerald & Gold (DEFAULT, the original). Deep emerald grounds with a
+     champagne-gold accent and the gilt crest. */
+  --ivory: #fbf7ee;
+  --paper: #f4eedc;
+  --emerald-deep: #0b3b2e;
+  --emerald-ink: #06241b;
+  --gold-champagne: #c9a961;
+  --gold-soft: #e6c98a;
+  --gold-deep: #7a5f28;
+  --oxblood: #6b1f2a;
+  --charcoal: #2a2a2a;
   --ink: #1a1a1a;
   --gilt: linear-gradient(135deg, #b8862f 0%, #e6c36a 45%, #b8862f 100%);
 
   --radius: 0.5rem;
-  --background: #fbf3f3;
-  --foreground: #5e2740;
+  --background: #fbf7ee;
+  --foreground: #06241b;
   --card: #ffffff;
-  --card-foreground: #5e2740;
+  --card-foreground: #06241b;
   --popover: #ffffff;
-  --popover-foreground: #5e2740;
-  --primary: #743a55;
-  --primary-foreground: #fbf3f3;
-  --secondary: #f6e6e7;
-  --secondary-foreground: #5e2740;
-  --muted: #efdcde;
+  --popover-foreground: #06241b;
+  --primary: #0b3b2e;
+  --primary-foreground: #fbf7ee;
+  --secondary: #f4eedc;
+  --secondary-foreground: #06241b;
+  --muted: #efe7d3;
   --muted-foreground: #5a5347;
-  --accent: #5f8a52;
-  --accent-foreground: #fbf3f3;
-  --destructive: #7d3346;
-  --destructive-foreground: #fbf3f3;
-  --border: rgba(95, 138, 82, 0.3);
-  --input: rgba(95, 138, 82, 0.4);
-  --ring: #5f8a52;
+  --accent: #c9a961;
+  --accent-foreground: #06241b;
+  --destructive: #6b1f2a;
+  --destructive-foreground: #fbf7ee;
+  --border: rgba(201, 169, 97, 0.35);
+  --input: rgba(201, 169, 97, 0.45);
+  --ring: #c9a961;
 }
 
 html[data-theme="garden"] {
@@ -145,38 +145,39 @@ html[data-theme="garden"] {
   --ring: #b86a85;
 }
 
-html[data-theme="royal"] {
-  /* Royal — Emerald & Gold (original) */
-  --ivory: #fbf7ee;
-  --paper: #f4eedc;
-  --emerald-deep: #0b3b2e;
-  --emerald-ink: #06241b;
-  --gold-champagne: #c9a961;
-  --gold-soft: #e6c98a;
-  --gold-deep: #7a5f28;
-  --oxblood: #6b1f2a;
-  --charcoal: #2a2a2a;
+html[data-theme="blush"] {
+  /* Blush — Pink & Green, pink majority. Deep plum-rose grounds, sage-green
+     accent, gilt crest harmonises. */
+  --ivory: #fbf3f3;
+  --paper: #f6e6e7;
+  --emerald-deep: #743a55;
+  --emerald-ink: #5e2740;
+  --gold-champagne: #5f8a52;
+  --gold-soft: #bcd9ac;
+  --gold-deep: #3a5a40;
+  --oxblood: #7d3346;
+  --charcoal: #3a2b30;
   --ink: #1a1a1a;
 
-  --background: #fbf7ee;
-  --foreground: #06241b;
-  --card-foreground: #06241b;
-  --popover-foreground: #06241b;
-  --primary: #0b3b2e;
-  --primary-foreground: #fbf7ee;
-  --secondary: #f4eedc;
-  --secondary-foreground: #06241b;
-  --muted: #efe7d3;
-  --accent: #c9a961;
-  --accent-foreground: #06241b;
-  --destructive: #6b1f2a;
-  --destructive-foreground: #fbf7ee;
-  --border: rgba(201, 169, 97, 0.35);
-  --input: rgba(201, 169, 97, 0.45);
-  --ring: #c9a961;
+  --background: #fbf3f3;
+  --foreground: #5e2740;
+  --card-foreground: #5e2740;
+  --popover-foreground: #5e2740;
+  --primary: #743a55;
+  --primary-foreground: #fbf3f3;
+  --secondary: #f6e6e7;
+  --secondary-foreground: #5e2740;
+  --muted: #efdcde;
+  --accent: #5f8a52;
+  --accent-foreground: #fbf3f3;
+  --destructive: #7d3346;
+  --destructive-foreground: #fbf3f3;
+  --border: rgba(95, 138, 82, 0.3);
+  --input: rgba(95, 138, 82, 0.4);
+  --ring: #5f8a52;
 }
 
-/* "blush" is the default (:root), so html[data-theme="blush"] needs no block —
+/* "royal" is the default (:root), so html[data-theme="royal"] needs no block —
    it simply falls back to :root. */
 
 @layer base {

@@ -1,0 +1,8 @@
+{
+  "currency": "NGN",
+  "presets": [20000, 50000, 100000, 250000, 500000],
+  "bankName": "United Bank for Africa (UBA)",
+  "accountName": "Tiwalade Omotosho",
+  "accountNumber": "2081599431",
+  "transactionDescription": "Wedding blessing for E&T"
+}

@@ -1,10 +1,9 @@
+import { Fragment } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Crest } from "@/components/heraldry/Crest";
-import { Cipher } from "@/components/heraldry/Cipher";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { Countdown } from "@/components/Countdown";
-import { Marquee } from "@/components/Marquee";
 import { img } from "@/content/images";
 import site from "@/content/site.json";
 import story from "@/content/story.json";
@@ -192,50 +191,77 @@ function CoupleCard({
   );
 }
 
+type PartyMember = { role: string; name: string; image: string };
+
 function BridalParty() {
+  const pairs = party.bride.map((b, i) => ({ b, g: party.groom[i] as PartyMember | undefined }));
   return (
     <SectionWrapper id="party" ground="ivory">
       <div className="text-center">
         <Eyebrow>{party.eyebrow}</Eyebrow>
         <DisplayTitle className="mt-4">{party.title}</DisplayTitle>
         <GoldHairline withCipher wide />
+        <p className="hidden md:block font-ceremonial text-[0.6rem] tracking-[0.3em] text-charcoal/40">
+          {party.note}
+        </p>
       </div>
 
-      <div className="mt-14 space-y-10">
-        <PartyTrain label={party.brideLabel} members={party.bride} />
-        <PartyTrain label={party.groomLabel} members={party.groom} />
+      {/* Tablet / desktop: portraits paired in order — bridesmaid left, groomsman right */}
+      <div className="hidden md:block max-w-4xl mx-auto mt-14">
+        <div className="grid grid-cols-2 gap-x-10 lg:gap-x-16">
+          <p className="text-center font-script text-2xl text-gold">{party.brideLabel}</p>
+          <p className="text-center font-script text-2xl text-gold">{party.groomLabel}</p>
+        </div>
+        <div className="mt-6 grid grid-cols-2 gap-x-10 lg:gap-x-16 gap-y-12">
+          {pairs.map(({ b, g }, i) => (
+            <Fragment key={i}>
+              <PartyPortrait member={b} />
+              {g ? <PartyPortrait member={g} /> : <span aria-hidden />}
+            </Fragment>
+          ))}
+        </div>
       </div>
-      <p className="mt-8 text-center font-ceremonial text-[0.6rem] tracking-[0.3em] text-charcoal/40">
-        Drag or swipe to meet them all
-      </p>
+
+      {/* Mobile: bridesmaids lined up, then groomsmen */}
+      <div className="md:hidden mt-12 space-y-14">
+        <div>
+          <p className="mb-6 text-center font-script text-2xl text-gold">{party.brideLabel}</p>
+          <div className="space-y-10">
+            {party.bride.map((b) => (
+              <PartyPortrait key={b.name} member={b} />
+            ))}
+          </div>
+        </div>
+        <div>
+          <p className="mb-6 text-center font-script text-2xl text-gold">{party.groomLabel}</p>
+          <div className="space-y-10">
+            {party.groom.map((g) => (
+              <PartyPortrait key={g.name} member={g} />
+            ))}
+          </div>
+        </div>
+      </div>
     </SectionWrapper>
   );
 }
 
-function PartyTrain({
-  label,
-  members,
-}: {
-  label: string;
-  members: { role: string; name: string }[];
-}) {
+/** A single bridal-party portrait — smaller than the couple's, secondary focus. */
+function PartyPortrait({ member }: { member: PartyMember }) {
   return (
-    <div>
-      <p className="mb-5 text-center font-script text-2xl text-gold">{label}</p>
-      <Marquee
-        items={members}
-        getKey={(p) => p.name}
-        renderItem={(p) => (
-          <div className="text-center w-40 px-4">
-            <div className="grid place-items-center h-20 w-20 mx-auto rounded-full bg-paper border border-gold/40">
-              <Cipher size={32} />
-            </div>
-            <p className="eyebrow mt-5 !text-[0.6rem]">{p.role}</p>
-            <p className="font-display text-lg mt-2 text-emerald-ink">{p.name}</p>
-          </div>
-        )}
-      />
-    </div>
+    <figure className="group text-center">
+      <div className="relative mx-auto aspect-[3/4] max-w-[16rem] overflow-hidden border border-gold/40 bg-ivory">
+        <img
+          src={img(member.image)}
+          alt={member.name}
+          loading="lazy"
+          className="h-full w-full object-cover grayscale-[55%] transition-all duration-700 group-hover:grayscale-0"
+        />
+      </div>
+      <figcaption>
+        <p className="eyebrow mt-4 !text-[0.58rem]">{member.role}</p>
+        <p className="mt-1.5 font-display text-xl text-emerald-ink">{member.name}</p>
+      </figcaption>
+    </figure>
   );
 }
 

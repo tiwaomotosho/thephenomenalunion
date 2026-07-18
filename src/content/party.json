@@ -3,20 +3,21 @@
   "title": "Our bridal party",
   "brideLabel": "The Bride's Maids",
   "groomLabel": "The Groom's Men",
+  "note": "Paired in order of standing",
   "bride": [
-    { "role": "Chief Bridesmaid", "name": "Fọlashadé Adékúnlé" },
-    { "role": "Bridesmaid", "name": "Olámidé Bámidélé" },
-    { "role": "Bridesmaid", "name": "Chiamaka Eze" },
-    { "role": "Bridesmaid", "name": "Hàlimà Yusuf" },
-    { "role": "Bridesmaid", "name": "Témitọ́pẹ́ Ogúnlèyè" },
-    { "role": "Bridesmaid", "name": "Zainab Bello" }
+    { "role": "Chief Bridesmaid", "name": "Fọlashadé Adékúnlé", "image": "party-bride-1" },
+    { "role": "Bridesmaid", "name": "Olámidé Bámidélé", "image": "party-bride-2" },
+    { "role": "Bridesmaid", "name": "Chiamaka Eze", "image": "party-bride-3" },
+    { "role": "Bridesmaid", "name": "Hàlimà Yusuf", "image": "party-bride-4" },
+    { "role": "Bridesmaid", "name": "Témitọ́pẹ́ Ogúnlèyè", "image": "party-bride-5" },
+    { "role": "Bridesmaid", "name": "Zainab Bello", "image": "party-bride-6" }
   ],
   "groom": [
-    { "role": "Best Man", "name": "Dr. Babátúndé Ọmọ́tọ̀shọ́" },
-    { "role": "Groomsman", "name": "Fẹ́mi Adégbúyì" },
-    { "role": "Groomsman", "name": "Chinedu Okafor" },
-    { "role": "Groomsman", "name": "Ibrahim Sani" },
-    { "role": "Groomsman", "name": "Sẹ̀un Afọláyan" },
-    { "role": "Groomsman", "name": "Emeka Nwosu" }
+    { "role": "Best Man", "name": "Dr. Babátúndé Ọmọ́tọ̀shọ́", "image": "party-groom-1" },
+    { "role": "Groomsman", "name": "Fẹ́mi Adégbúyì", "image": "party-groom-2" },
+    { "role": "Groomsman", "name": "Chinedu Okafor", "image": "party-groom-3" },
+    { "role": "Groomsman", "name": "Ibrahim Sani", "image": "party-groom-4" },
+    { "role": "Groomsman", "name": "Sẹ̀un Afọláyan", "image": "party-groom-5" },
+    { "role": "Groomsman", "name": "Emeka Nwosu", "image": "party-groom-6" }
   ]
 }

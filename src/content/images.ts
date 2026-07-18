@@ -5,18 +5,19 @@
  * non-technical edits stay in plain JSON. This map turns those keys into the
  * hashed asset URLs Vite produces at build time.
  *
- * Gallery photos are picked up automatically via import.meta.glob — drop a
- * `gallery-N.jpg` in src/assets and it becomes available as key "gallery-N"
- * with no code change. Named portraits stay explicit below.
+ * Gallery photos — and bridal-party portraits — are picked up automatically via
+ * import.meta.glob: drop a `gallery-N.jpg` or `party-bride-N.jpg` /
+ * `party-groom-N.jpg` in src/assets and it becomes available under that key with
+ * no code change. Named portraits stay explicit below.
  */
 import bride from "@/assets/bride.jpg";
 import groom from "@/assets/groom.jpg";
 import heroBg from "@/assets/hero-bg.jpg";
 
-const galleryModules = import.meta.glob<string>("../assets/gallery-*.jpg", {
-  eager: true,
-  import: "default",
-});
+const globModules = import.meta.glob<string>(
+  ["../assets/gallery-*.jpg", "../assets/party-*.jpg"],
+  { eager: true, import: "default" },
+);
 
 const IMAGES: Record<string, string> = {
   bride,
@@ -24,14 +25,22 @@ const IMAGES: Record<string, string> = {
   "hero-bg": heroBg,
 };
 
-for (const [path, url] of Object.entries(galleryModules)) {
-  const match = path.match(/gallery-(\d+)\.jpg$/);
-  if (match) IMAGES[`gallery-${match[1]}`] = url;
+for (const [path, url] of Object.entries(globModules)) {
+  const match = path.match(/((?:gallery|party-bride|party-groom)-\d+)\.jpg$/);
+  if (match) IMAGES[match[1]] = url;
 }
 
-/** Resolve a content image key to its built asset URL. */
+/**
+ * Resolve a content image key to its built asset URL. Bridal-party portraits
+ * that have not been supplied yet fall back to the couple's own portraits, so
+ * the layout is never broken — drop the real `party-bride-N.jpg` /
+ * `party-groom-N.jpg` files in src/assets to replace them.
+ */
 export function img(key: string): string {
-  return IMAGES[key] ?? "";
+  if (IMAGES[key]) return IMAGES[key];
+  if (key.startsWith("party-groom")) return groom;
+  if (key.startsWith("party-bride")) return bride;
+  return "";
 }
 
 /** All gallery photo keys, ordered numerically (gallery-1, gallery-2, …). */
