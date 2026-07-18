@@ -5,19 +5,27 @@
   "groomLabel": "The Groom's Men",
   "note": "Paired in order of standing",
   "bride": [
-    { "role": "Chief Bridesmaid", "name": "Fọlashadé Adékúnlé", "image": "party-bride-1" },
-    { "role": "Bridesmaid", "name": "Olámidé Bámidélé", "image": "party-bride-2" },
-    { "role": "Bridesmaid", "name": "Chiamaka Eze", "image": "party-bride-3" },
-    { "role": "Bridesmaid", "name": "Hàlimà Yusuf", "image": "party-bride-4" },
-    { "role": "Bridesmaid", "name": "Témitọ́pẹ́ Ogúnlèyè", "image": "party-bride-5" },
-    { "role": "Bridesmaid", "name": "Zainab Bello", "image": "party-bride-6" }
+    { "role": "Chief Bridesmaid", "name": "Praise Ajibola", "image": "gallery-32" },
+    { "role": "Man of Honour", "name": "David Ajibola", "image": "gallery-38" },
+    { "role": "Bridesmaid", "name": "Esther Adedeji", "image": "gallery-35" },
+    { "role": "Bridesmaid", "name": "Adedamola Ogunpitan", "image": "gallery-36" },
+    { "role": "Bridesmaid", "name": "Cassandra Oranu", "image": "gallery-41" },
+    { "role": "Bridesmaid", "name": "Oluwatemilorun Adedamola", "image": "gallery-37" },
+    { "role": "Bridesmaid", "name": "Jesutofarati Elegbede", "image": "gallery-44" },
+    { "role": "Bridesmaid", "name": "Blessing Oladokun", "image": "gallery-34" },
+    { "role": "Bridesmaid", "name": "Oluwapelumi Daniel-Eronlan", "image": "gallery-39" },
+    { "role": "Bridesmaid", "name": "Pelumi Adeola", "image": "gallery-40" }                
   ],
   "groom": [
-    { "role": "Best Man", "name": "Dr. Babátúndé Ọmọ́tọ̀shọ́", "image": "party-groom-1" },
-    { "role": "Groomsman", "name": "Fẹ́mi Adégbúyì", "image": "party-groom-2" },
-    { "role": "Groomsman", "name": "Chinedu Okafor", "image": "party-groom-3" },
-    { "role": "Groomsman", "name": "Ibrahim Sani", "image": "party-groom-4" },
-    { "role": "Groomsman", "name": "Sẹ̀un Afọláyan", "image": "party-groom-5" },
-    { "role": "Groomsman", "name": "Emeka Nwosu", "image": "party-groom-6" }
+    { "role": "Best Man", "name": "Joshua Adegbite", "image": "gallery-25" },
+    { "role": "Groomsman", "name": "Lanre Balogun", "image": "gallery-26" },
+    { "role": "Groomsman", "name": "Damilola Dada", "image": "gallery-43" },
+    { "role": "Groomsman", "name": "Akinloluwa Afonja", "image": "gallery-27" },
+    { "role": "Groomsman", "name": "Olorunfemi Muyiwa", "image": "gallery-33" },
+    { "role": "Groomsman", "name": "Clement Babaniyi", "image": "gallery-29" },
+    { "role": "Groomsman", "name": "David Shittu", "image": "party-groom-3" },
+    { "role": "Groomsman", "name": "Praise Oladimeji", "image": "gallery-31" },
+    { "role": "Groomsman", "name": "Iyanuoluwa Olutide", "image": "gallery-30" },
+    { "role": "Groomsman", "name": "Shalom Ige", "image": "party-groom-6" }    
   ]
 }
