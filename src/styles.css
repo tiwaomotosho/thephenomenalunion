@@ -338,9 +338,19 @@ html[data-theme="blush"] {
   to { stroke-dashoffset: 0; }
 }
 
+/* A confirmation that announces itself, holds, then dissolves — used for the
+   "your blessing is on the wall" accent after a note is posted. */
+@keyframes royal-accent {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.98); }
+  12%  { opacity: 1; transform: translateY(0) scale(1); }
+  76%  { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-6px) scale(0.99); }
+}
+
 @utility animate-royal-rise { animation: royal-rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both; }
 @utility animate-royal-fade { animation: royal-fade 600ms ease both; }
 @utility animate-seal-press { animation: seal-press 700ms cubic-bezier(0.34, 1.4, 0.5, 1) both; }
+@utility animate-royal-accent { animation: royal-accent 4200ms cubic-bezier(0.22, 1, 0.36, 1) both; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
