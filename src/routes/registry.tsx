@@ -234,10 +234,10 @@ function DetailRow({
   last?: boolean;
 }) {
   return (
-    <div className={`flex items-baseline justify-between gap-4 px-5 py-3.5 ${last ? "" : "border-b border-gold/25"}`}>
+    <div className={`flex flex-col gap-1 px-5 py-3.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 ${last ? "" : "border-b border-gold/25"}`}>
       <span className="eyebrow !text-left !text-[0.58rem] shrink-0">{label}</span>
       <span
-        className={`text-right font-display text-emerald-ink font-medium ${
+        className={`min-w-0 break-words text-left font-display font-medium text-emerald-ink sm:text-right ${
           mono ? "text-2xl tracking-[0.12em] tabular-nums" : "text-lg"
         }`}
       >

@@ -51,7 +51,7 @@
       "navLabel": "FAQ",
       "cardTitle": "Frequently Asked",
       "blurb": "Dress code, children, parking, and other gentle matters.",
-      "visible": false
+      "visible": true
     }
   ]
 }
