@@ -27,7 +27,7 @@
       "navLabel": "Gallery",
       "cardTitle": "Gallery · #EniSaidYes",
       "blurb": "Quiet evidence of the years that brought us here.",
-      "visible": true
+      "visible": false
     },
     {
       "id": "registry",
