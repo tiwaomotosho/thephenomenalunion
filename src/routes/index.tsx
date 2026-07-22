@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Crest } from "@/components/heraldry/Crest";
+import { Cipher } from "@/components/heraldry/Cipher";
 import { GoldHairline } from "@/components/heraldry/GoldHairline";
 import { SectionWrapper, Eyebrow, DisplayTitle } from "@/components/layout/SectionWrapper";
 import { Countdown } from "@/components/Countdown";
@@ -335,16 +336,24 @@ function FriendsOfTheHouse() {
 /** A single friend portrait — like a party portrait, but with a name and no role. */
 function FriendPortrait({ friend }: { friend: { name: string; image: string } }) {
   const imgRef = useBrightenInView<HTMLImageElement>();
+  const src = img(friend.image);
   return (
     <figure className="group text-center">
       <div className="relative mx-auto aspect-[3/4] max-w-[14rem] overflow-hidden border border-gold/40 bg-ivory">
-        <img
-          ref={imgRef}
-          src={img(friend.image)}
-          alt={friend.name}
-          loading="lazy"
-          className="portrait-photo h-full w-full object-cover"
-        />
+        {src ? (
+          <img
+            ref={imgRef}
+            src={src}
+            alt={friend.name}
+            loading="lazy"
+            className="portrait-photo h-full w-full object-cover"
+          />
+        ) : (
+          // Image not supplied yet — a quiet gilt placeholder, no broken <img>.
+          <div className="grid h-full w-full place-items-center bg-paper">
+            <Cipher size={30} />
+          </div>
+        )}
       </div>
       <figcaption>
         <p className="mt-3 font-display text-lg text-emerald-ink">{friend.name}</p>
