@@ -31,6 +31,10 @@ export interface HomeSections {
   story: boolean;
   couple: boolean;
   party: boolean;
+  /** "Friends of the House" — an addendum under the Court of Honour (§V), not
+   *  a numbered section of its own, so it is intentionally left out of the
+   *  page-numbering count below. */
+  friends: boolean;
 }
 
 const PAGES = data.pages as PageDef[];

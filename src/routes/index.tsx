@@ -32,6 +32,7 @@ function Home() {
       {homeSections.story && <OurStory />}
       {homeSections.couple && <MeetTheCouple />}
       {homeSections.party && <BridalParty />}
+      {homeSections.friends && <FriendsOfTheHouse />}
       <PreviewLinks />
     </>
   );
@@ -303,6 +304,50 @@ function PartyPortrait({ member }: { member: PartyMember }) {
       <figcaption>
         <p className="eyebrow mt-4 !text-[0.58rem]">{member.role}</p>
         <p className="mt-1.5 font-display text-xl text-emerald-ink">{member.name}</p>
+      </figcaption>
+    </figure>
+  );
+}
+
+/**
+ * Friends of the House — the wider circle who make up the day. A flat grid of
+ * portraits with names only (no roles), sitting just below the Court of Honour.
+ */
+function FriendsOfTheHouse() {
+  if (!party.friends || party.friends.length === 0) return null;
+  return (
+    <SectionWrapper id="friends" ground="paper">
+      <div className="text-center">
+        <Eyebrow>{party.friendsEyebrow}</Eyebrow>
+        <DisplayTitle className="mt-4">{party.friendsTitle}</DisplayTitle>
+        <GoldHairline withCipher wide />
+      </div>
+
+      <div className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3 lg:grid-cols-4">
+        {party.friends.map((f) => (
+          <FriendPortrait key={f.name} friend={f} />
+        ))}
+      </div>
+    </SectionWrapper>
+  );
+}
+
+/** A single friend portrait — like a party portrait, but with a name and no role. */
+function FriendPortrait({ friend }: { friend: { name: string; image: string } }) {
+  const imgRef = useBrightenInView<HTMLImageElement>();
+  return (
+    <figure className="group text-center">
+      <div className="relative mx-auto aspect-[3/4] max-w-[14rem] overflow-hidden border border-gold/40 bg-ivory">
+        <img
+          ref={imgRef}
+          src={img(friend.image)}
+          alt={friend.name}
+          loading="lazy"
+          className="portrait-photo h-full w-full object-cover"
+        />
+      </div>
+      <figcaption>
+        <p className="mt-3 font-display text-lg text-emerald-ink">{friend.name}</p>
       </figcaption>
     </figure>
   );

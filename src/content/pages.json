@@ -2,7 +2,8 @@
   "homeSections": {
     "story": true,
     "couple": true,
-    "party": true
+    "party": true,
+    "friends": true
   },
   "pages": [
     {

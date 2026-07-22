@@ -4,6 +4,8 @@
   "brideLabel": "The Bride's Maids",
   "groomLabel": "The Groom's Men",
   "note": "Paired in order of standing",
+  "friendsEyebrow": "With gratitude",
+  "friendsTitle": "Friends of the House",
   "bride": [
     { "role": "Maid of Honour", "name": "Praise Ajibola", "image": "gallery-32" },
     { "role": "Man of Honour", "name": "David Ajibola", "image": "gallery-38" },
@@ -27,6 +29,16 @@
     { "role": "Groomsman", "name": "David Shittu", "image": "gallery-47" },
     { "role": "Groomsman", "name": "Praise Oladimeji", "image": "gallery-31" },
     { "role": "Groomsman", "name": "Iyanuoluwa Olutide", "image": "gallery-30" },
-    { "role": "Groomsman", "name": "Shalom Ige", "image": "gallery-46" }    
+    { "role": "Groomsman", "name": "Shalom Ige", "image": "gallery-46" }
+  ],
+  "friends": [
+    { "name": "Ayomide Adedeji", "image": "gallery-48" },
+    { "name": "Favour Ubaka", "image": "gallery-49" },
+    { "name": "Ayomide Abodunrin", "image": "gallery-50" },
+    { "name": "Teniola Akindere", "image": "gallery-51" },
+    { "name": "Mojola Ayeni", "image": "gallery-52" },
+    { "name": "Juliet Ezeokolie", "image": "gallery-53" },
+    { "name": "Adenike Raji", "image": "gallery-54" },
+    { "name": "Deborah Jokanola", "image": "gallery-55" }
   ]
 }
