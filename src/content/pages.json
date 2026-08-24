@@ -20,7 +20,7 @@
       "navLabel": "Venue",
       "cardTitle": "The Venue",
       "blurb": "An indoor garden wedding at Redemption Camp, and how to find us.",
-      "visible": true
+      "visible": false
     },
     {
       "id": "gallery",
@@ -52,7 +52,7 @@
       "navLabel": "FAQ",
       "cardTitle": "Frequently Asked",
       "blurb": "Dress code, children, parking, and other gentle matters.",
-      "visible": true
+      "visible": false
     }
   ]
 }
